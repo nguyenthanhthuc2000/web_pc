@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/_admin/css/feathericon.min.css">
     <link rel="stylesheet" href="/_admin/plugins/morris/morris.css">
     <link rel="stylesheet" href="/_admin/css/style.css"> </head>
+    <link rel="stylesheet" href="/vendor/sweetalert2.min.css"> </head>
 
 <body>
 <div class="main-wrapper login-body">
@@ -42,7 +43,7 @@
                                 <button class="btn btn-primary btn-block" type="submit">Đăng nhập</button>
                             </div>
                         </form>
-                        @include('admin.layout.message')
+                        @include('notification')
                     </div>
                 </div>
             </div>

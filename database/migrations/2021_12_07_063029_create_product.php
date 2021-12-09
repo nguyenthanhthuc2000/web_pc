@@ -19,13 +19,17 @@ class CreateProduct extends Migration
             $table->string('slug');
             $table->integer('category_id')->nullable();
             $table->integer('remains')->default(0); //sl con lai
-            $table->integer('quantity')->default(0); //sl da ban
+            $table->integer('sold')->default(0); //sl da ban
             $table->text('options')->nullable(); //json
-            $table->text('description')->nullable(); //mo ta
+            $table->text('desc')->nullable(); //mo ta
             $table->text('content')->nullable(); //noi dung
-            $table->string('image')->nullable(); //hình anh
+            $table->string('image1')->nullable(); //hình anh
+            $table->string('image2')->nullable(); //hình anh
+            $table->string('image3')->nullable(); //hình anh
+            $table->string('image4')->nullable(); //hình anh
             $table->integer('price')->default(0); //gia
             $table->integer('status')->default(0);
+            $table->integer('selling')->default(0);
             $table->timestamps();
         });
     }

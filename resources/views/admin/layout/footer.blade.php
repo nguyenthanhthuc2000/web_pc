@@ -8,6 +8,12 @@
 <script src="/_admin/js/chart.morris.js"></script>
 <script src="/_admin/js/script.js"></script>
 <script src="/_admin/js/my_script.js"></script>
+<script src="/vendor/sweetalert2.min.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
+@stack('js')
+<script>
+    CKEDITOR.replace('ckeditor');
+</script>
 </body>
 
 </html>

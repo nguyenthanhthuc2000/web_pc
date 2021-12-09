@@ -22,16 +22,52 @@ function ChangeToSlug()
 }
 
 
-let review_img = function(event){
-    let img = document.getElementById('review-img');
+let review_img1 = function(event){
+    let img = document.getElementById('review-img1');
+    img.src = URL.createObjectURL(event.target.files[0]);
+    img.onload = function(){
+        URL.revokeObjectURL(img.src);
+    }
+}
+let review_img2 = function(event){
+    let img = document.getElementById('review-img2');
+    img.src = URL.createObjectURL(event.target.files[0]);
+    img.onload = function(){
+        URL.revokeObjectURL(img.src);
+    }
+}
+let review_img3 = function(event){
+    let img = document.getElementById('review-img3');
+    img.src = URL.createObjectURL(event.target.files[0]);
+    img.onload = function(){
+        URL.revokeObjectURL(img.src);
+    }
+}
+let review_img4 = function(event){
+    let img = document.getElementById('review-img4');
     img.src = URL.createObjectURL(event.target.files[0]);
     img.onload = function(){
         URL.revokeObjectURL(img.src);
     }
 }
 $(document).ready(function(){
-    $('#review-img').click(function(){
-        $('#input_file_img').click();
+    $('#review-img1').click(function(){
+        $('#input_file_img1').click();
+    })
+})
+$(document).ready(function(){
+    $('#review-img2').click(function(){
+        $('#input_file_img2').click();
+    })
+})
+$(document).ready(function(){
+    $('#review-img3').click(function(){
+        $('#input_file_img3').click();
+    })
+})
+$(document).ready(function(){
+    $('#review-img4').click(function(){
+        $('#input_file_img4').click();
     })
 })
 function isNumberKey(event){
@@ -40,3 +76,5 @@ function isNumberKey(event){
         return false;
     return true;
 }
+
+

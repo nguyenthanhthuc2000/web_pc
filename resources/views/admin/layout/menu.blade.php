@@ -46,8 +46,8 @@
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span>  Sản phẩm  </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
-                        <li><a href="all-booking.html"> Danh sách </a></li>
-                        <li><a href="edit-booking.html"> Thêm mới </a></li>
+                        <li><a href="{{ route('product.index') }}"> Danh sách </a></li>
+                        <li><a href="{{ route('product.add') }}"> Thêm mới </a></li>
                     </ul>
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Đơn hàng </span> <span class="menu-arrow"></span></a>

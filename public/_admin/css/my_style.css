@@ -12,3 +12,18 @@
     padding-left: 0.6em;
     border-radius: 10rem;
 }
+.img-admin{
+
+    object-fit: cover;
+    width: 130px;
+    height: 80px;
+}
+.list-rule td{
+    padding: 0!important;
+}
+.list-rule tr{
+   border-bottom: none!important;
+}
+.list-rule td, .list-rule th{
+    border-top: none!important;
+}

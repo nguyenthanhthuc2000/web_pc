@@ -13,12 +13,12 @@ class CreateImage extends Migration
      */
     public function up()
     {
-        Schema::create('image', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id');
-            $table->string('image');
-            $table->timestamps();
-        });
+//        Schema::create('image', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('product_id');
+//            $table->string('image');
+//            $table->timestamps();
+//        });
     }
 
     /**

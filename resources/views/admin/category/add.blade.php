@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="display-block">Trạng thái</label>
+                                    <label class="display-block">Nổi bật</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="status" id="blog_active" value="1" checked="">
