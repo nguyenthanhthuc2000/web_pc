@@ -124,3 +124,4 @@ class CategoryController extends Controller
         $category = Category::find($request->id)->update(['status' => $request->status]);
     }
 }
+

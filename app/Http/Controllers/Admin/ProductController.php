@@ -33,7 +33,7 @@ class ProductController extends Controller
             ],
             [
                 'name.required' => 'Vui lòng nhập tên',
-                'slug.unique' => 'Tên sản phẩm đã tồn tại',
+                'slug.unique' => 'Slug sản phẩm đã tồn tại',
                 'slug.required' =>  'Vui lòng nhập slug',
                 'category_id.required' =>  'Vui lòng chọn danh mục',
             ],
@@ -99,7 +99,97 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('error', 'Xóa thất bại!');
     }
 
-    public function edit(){
-        return view('admin.product.edit');
+    public function edit($id){
+        $pro = Product::find($id);
+        $options = json_decode($pro->options);
+        $cats = Category::orderBy('id', 'DESC')->get();
+        return view('admin.product.edit', compact('pro', 'cats', 'options'));
+    }
+
+    public function update(Request $request, $id){
+        $this->validate($request,
+            [
+                'name' => [
+                    'required',
+                ],
+                'slug' => ['required'],
+                'category_id' => ['required'],
+            ],
+            [
+                'name.required' => 'Vui lòng nhập tên',
+                'slug.required' =>  'Vui lòng nhập slug',
+                'category_id.required' =>  'Vui lòng chọn danh mục',
+            ],
+        );
+
+        //kiem tra slug
+        $slugs = Product::whereNotIn('id', [$id])->pluck('slug')->all();
+        if(in_array($request->slug, $slugs)){
+            return redirect()->back()->withInput()->with('errorSlug', 'Slug đã đã tồn tại');
+        }
+
+        $product = Product::find($id);
+        $array = [
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'category_id' => $request->category_id,
+            'remains' => $request->remains,
+            'sold' => $request->sold,
+            'desc' => $request->desc,
+            'price' => $request->price,
+        ];
+
+        if($request->file('image1')){
+            //tạo tên mới cho ảnh để k bị trùng
+            $image = substr(md5(microtime()),rand(0,4), 6).'-'.$request->file('image1')->getClientOriginalName();
+            //lưu ảnh vào /upload/products
+            $request->file('image1')->move('upload/products/', $image);
+            $array = $array + array('image1' => $image);
+
+            //xóa hình cũ
+            if(File::exists(public_path()."/upload/products/".$product->image1)){
+                File::delete(public_path()."/upload/products/".$product->image1);
+            }
+        }
+        if($request->file('image2')){
+            $image = substr(md5(microtime()),rand(0,5), 6).'-'.$request->file('image2')->getClientOriginalName();
+            $request->file('image2')->move('upload/products/', $image);
+            $array = $array + array('image2' => $image);
+
+            //xóa hình cũ
+            if(File::exists(public_path()."/upload/products/".$product->image2)){
+                File::delete(public_path()."/upload/products/".$product->image2);
+            }
+        }
+        if($request->file('image3')){
+            $image = substr(md5(microtime()),rand(0,6), 6).'-'.$request->file('image3')->getClientOriginalName();
+            $request->file('image3')->move('upload/products/', $image);
+            $array = $array + array('image3' => $image);
+
+            //xóa hình cũ
+            if(File::exists(public_path()."/upload/products/".$product->image3)){
+                File::delete(public_path()."/upload/products/".$product->image3);
+            }
+        }
+        if($request->file('image4')){
+            $image = substr(md5(microtime()),rand(0,7), 6).'-'.$request->file('image4')->getClientOriginalName();
+            $request->file('image4')->move('upload/products/', $image);
+            $array = $array + array('image4' => $image);
+
+            //xóa hình cũ
+            if(File::exists(public_path()."/upload/products/".$product->image4)){
+                File::delete(public_path()."/upload/products/".$product->image4);
+            }
+        }
+        if( isset($request->title_rules)  && isset($request->rules)){
+            $c = json_encode(array_map(null, $request->title_rules, $request->rules));
+            $array = $array + array('options' => $c);
+        }
+
+        $query = $product->update($array);
+        if($query){
+            return redirect()->route('product.index')->with('success', 'Cập nhật thành công!');
+        }
+        return redirect()->route('product.index')->with('error', 'Cập nhật thất bại!');
     }
 }
