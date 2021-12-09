@@ -85,7 +85,7 @@
                                                 <div class="col-md-12 pt-2">
                                                     <div class="form-group">
                                                         <label>Nội dung</label>
-                                                        <textarea class="form-control" rows="5" id="ckeditor" name="content"></textarea>
+                                                        <textarea class="form-control" rows="5" id="ckeditor" name="content_pro"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 pt-4">

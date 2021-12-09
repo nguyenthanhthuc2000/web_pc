@@ -47,6 +47,7 @@ class ProductController extends Controller
             'sold' => $request->sold,
             'desc' => $request->desc,
             'price' => $request->price,
+            'content' => $request->content_pro,
         ];
 
         if($request->file('image1')){
@@ -135,6 +136,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'remains' => $request->remains,
             'sold' => $request->sold,
+            'content' => $request->content_pro,
             'desc' => $request->desc,
             'price' => $request->price,
         ];
