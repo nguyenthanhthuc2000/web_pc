@@ -21,6 +21,13 @@ function ChangeToSlug()
     document.getElementById('convert_slug').value = slug;
 }
 
+let review_img = function(event){
+    let img = document.getElementById('review-img');
+    img.src = URL.createObjectURL(event.target.files[0]);
+    img.onload = function(){
+        URL.revokeObjectURL(img.src);
+    }
+}
 
 let review_img1 = function(event){
     let img = document.getElementById('review-img1');
@@ -50,6 +57,11 @@ let review_img4 = function(event){
         URL.revokeObjectURL(img.src);
     }
 }
+$(document).ready(function(){
+    $('#review-img').click(function(){
+        $('#input_file_img').click();
+    })
+})
 $(document).ready(function(){
     $('#review-img1').click(function(){
         $('#input_file_img1').click();
