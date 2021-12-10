@@ -55,9 +55,11 @@ Route::prefix('admin')->group(function () {
         Route::prefix('voucher')->group(function () {
             Route::get('index','Admin\VoucherController@index')->name('voucher.index');
             Route::get('add','Admin\VoucherController@add')->name('voucher.add');
-            Route::get('edit','Admin\VoucherController@edit')->name('voucher.edit');
+            Route::get('edit/{id}','Admin\VoucherController@edit')->name('voucher.edit');
             Route::get('destroy/{id}','Admin\VoucherController@destroy')->name('voucher.destroy'); // xóa
             Route::post('status','Admin\VoucherController@status')->name('voucher.status'); // cap nhat tt
+            Route::post('store','Admin\VoucherController@store')->name('voucher.store'); //
+            Route::post('update/{id}','Admin\VoucherController@update')->name('voucher.update'); //
         });
 
     });

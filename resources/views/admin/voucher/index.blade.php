@@ -25,11 +25,11 @@
                                     <tr>
                                         <th>Tên</th>
                                         <th>Mã</th>
-                                        <th>Giảm</th>
-                                        <th>Hình thức</th>
-                                        <th>Đã dùng</th>
-                                        <th>Còn lại</th>
-                                        <th>Trạng thái</th>
+                                        <th  class="text-center">Giảm</th>
+                                        <th class="text-center">Hình thức</th>
+                                        <th class="text-center">Đã dùng</th>
+                                        <th class="text-center">Còn lại</th>
+                                        <th  class="text-center">Trạng thái</th>
                                         <th class="text-right">Thao tác</th>
                                     </tr>
                                     </thead>
@@ -39,31 +39,31 @@
                                         @foreach($vouchers as $voucher)
                                             <tr>
                                                 <td class="text-nowrap">
-                                                    <div>{{strtoupper($voucher->name)}}</div>
+                                                    <div>{{$voucher->name}}</div>
                                                 </td>
-                                                <td>{{$voucher->voucher}}</td>
-                                                <th>{{$voucher->number}}</th>
-                                                <th>
+                                                <td>{{$voucher->code}}</td>
+                                                <th  class="text-center">{{$voucher->number}}</th>
+                                                <th class="text-center">
                                                     @if($voucher->type == 1)
                                                         %
                                                     @else
                                                         VNĐ
                                                     @endif
                                                 </th>
-                                                <td>
+                                                <td class="text-center">
                                                     {{number_format($voucher->total, 0,' ,',' .')}}
                                                 </td>
-                                                <td>
+                                                <td  class="text-center">
                                                     {{$voucher->used}}
                                                 </td>
-                                                <td>
+                                                <td  class="text-center">
                                                     <input type="checkbox" {{$voucher->status == 1 ? 'checked' : ''}}  class="status" data-id="{{$voucher->id}}">
 
                                                 </td>
                                                 <td class="text-right">
-                                                    <a href="{{ route('voucher.edit', $voucher->id) }}" class=" btn-border btn-custom  btn btn-warning">Xem</a>
+                                                    <a href="{{ route('voucher.edit', $voucher->id) }}" class=" btn-border btn-custom  btn btn-warning">Sửa</a>
                                                     <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
-                                                            data-url="{{ route('order.destroy', $voucher->id) }}"
+                                                            data-url="{{ route('voucher.destroy', $voucher->id) }}"
                                                     >Xóa
                                                     </button>
                                                 </td>
@@ -71,7 +71,7 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="7">
+                                            <td colspan="8">
                                                 Không có dữ liệu
                                             </td>
                                         </tr>
@@ -90,3 +90,46 @@
     </div>
 @endsection
 
+@push('js')
+    <script>
+        // trạng thái
+        $('.status').click(function(){
+            let status = 0;
+            if(!$(this).prop('checked') ? status = 0 : status = 1);
+            var id = $(this).data('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:window.route('voucher.status'),
+                method:'POST',
+                data:{status:status, id:id},
+                success:function(data){
+
+                }
+            })
+        })
+
+        //xóa
+        $('.btn-delete').click(function(){
+            var url = $(this).data('url');
+            Swal.fire({
+              title: 'Bạn có chắc xóa không?',
+              text: "Bạn sẽ không thể khôi phục điều này!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok, Xóa',
+              cancelButtonText: 'Hủy'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                   window.location.href = url;
+              }
+            })
+
+        })
+    </script>
+@endpush
