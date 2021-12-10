@@ -13,6 +13,12 @@
             </div>
             @include('notification')
             <div class="row">
+                <div class="top-nav-search" style="margin: 0 0 20px 15px;">
+                    <form style="margin: 0">
+                        <input type="text" class="form-control" placeholder="Search here">
+                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
                 <div class="col-md-12 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-body">
