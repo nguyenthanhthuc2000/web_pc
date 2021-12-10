@@ -64,3 +64,5 @@ Route::prefix('admin')->group(function () {
 
     });
 });
+
+Route::get('/', 'customers\IndexController@index')->name('index');
