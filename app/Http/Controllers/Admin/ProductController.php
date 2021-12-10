@@ -188,6 +188,10 @@ class ProductController extends Controller
                 $c = json_encode(array_map(null, $request->title_rules, $request->rules));
                 $array = $array + array('options' => $c);
             }
+            
+            if(!isset($request->title_rules)){
+                $array = $array + array('options' => '');
+            }
 
             $query = $product->update($array);
             if ($query) {
