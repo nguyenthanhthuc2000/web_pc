@@ -57,11 +57,11 @@
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Nhân viên </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
-                        <li><a href="all-staff.html">Danh sách </a></li>
-                        <li><a href="edit-staff.html">Thêm mới </a></li>
+                        <li><a href="{{ route('user.index') }}">Danh sách </a></li>
+                        <li><a href="{{ route('user.add') }}">Thêm mới </a></li>
                     </ul>
                 </li>
-                <li> <a href="pricing.html"><i class="far fa-money-bill-alt"></i> <span>Đổi mật khẩu</span></a> </li>
+                <li> <a href="{{ route('admin.get.change.pass') }}"><i class="far fa-money-bill-alt"></i> <span>Đổi mật khẩu</span></a> </li>
 
             </ul>
         </div>

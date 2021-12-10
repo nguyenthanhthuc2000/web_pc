@@ -3,100 +3,73 @@
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-12 mt-5">
+                <div class="d-flex" style="justify-content: space-between">
+                    <div class=" mt-5">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Nhân viên</li>
                         </ul>
+                    </div>
+                    <div class=" mt-5">
+                        <a href="{{ route('user.add') }}" class="badge badge-pill bg-success inv-badge">Thêm mới</a>
                     </div>
                 </div>
             </div>
+            @include('notification')
             <div class="row">
                 <div class="col-md-12 d-flex">
                     <div class="card card-table flex-fill">
-                        <div class="card-header">
-                            <h4 class="card-title float-left mt-2">Đơn hàng</h4>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-center">
                                     <thead>
                                     <tr>
-                                        <th>Booking ID</th>
-                                        <th>Name</th>
-                                        <th>Email ID</th>
-                                        <th>Aadhar Number</th>
-                                        <th class="text-center">Room Type</th>
-                                        <th class="text-right">Number</th>
-                                        <th class="text-center">Status</th>
+                                        <th>ID</th>
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th class="text-center">Hoạt động</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-right">Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0001</div>
-                                        </td>
-                                        <td class="text-nowrap">Tommy Bernal</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3743585a5a4e55524559565b77524f565a475b521954585a">[email&#160;protected]</a></td>
-                                        <td>12414786454545</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>631-254-6480</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0002</div>
-                                        </td>
-                                        <td class="text-nowrap">Ellen Thill</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89fbe0eae1e8fbedebfbe6ebfafdc9ecf1e8e4f9e5eca7eae6e4">[email&#160;protected]</a></td>
-                                        <td>5456223232322</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>830-468-1042</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0003</div>
-                                        </td>
-                                        <td class="text-nowrap">Corina Kelsey</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76131a1a1318021e1f1a1a36130e171b061a135815191b">[email&#160;protected]</a></td>
-                                        <td>454543232625</td>
-                                        <td class="text-center">Single</td>
-                                        <td class="text-right">
-                                            <div>508-335-5531</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0004</div>
-                                        </td>
-                                        <td class="text-nowrap">Carolyn Lane</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50333f22393e313b353c23352910373d31393c7e333f3d">[email&#160;protected]</a></td>
-                                        <td>2368989562621</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>262-260-1170</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0005</div>
-                                        </td>
-                                        <td class="text-nowrap">Denise</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c7f7d6e73706572707d72795c7b717d7570327f7371">[email&#160;protected]</a></td>
-                                        <td>3245455582287</td>
-                                        <td class="text-center">Single</td>
-                                        <td class="text-right">
-                                            <div>570-458-0070</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
+
+                                    @if($users->count() > 0)
+                                        @foreach($users as $user)
+                                        <tr>
+                                            <td class="text-nowrap">
+                                                <div>{{$user->id}}</div>
+                                            </td>
+                                            <td class="text-nowrap">
+                                                {{$user->name}}
+                                            </td>
+                                            <td>{{$user->email}}</td>
+                                            <td class="text-center">
+                                                <a href=""
+                                                   class=" btn-border btn-custom  btn btn-success">Xem
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="checkbox" {{$user->status == 1 ? 'checked' : ''}}
+                                                    class="status" data-id="{{$user->id}}"
+                                                >
+                                            </td>
+                                            <td class="text-right">
+                                                <a href="{{ route('user.edit', $user->id) }}"
+                                                   class=" btn-border btn-custom  btn btn-warning">Sửa</a>
+                                                <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
+                                                        data-url="{{ route('user.destroy', $user->id) }}"
+                                                >Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6">
+                                                Không có dữ liệu
+                                            </td>
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -107,4 +80,47 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+     // trạng thái
+        $('.status').click(function(){
+            let status = 0;
+            if(!$(this).prop('checked') ? status = 0 : status = 1);
+            var id = $(this).data('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:window.route('user.status'),
+                method:'POST',
+                data:{status:status, id:id},
+                success:function(data){
 
+                }
+            })
+        })
+
+
+        $('.btn-delete').click(function(){
+            var url = $(this).data('url');
+            Swal.fire({
+              title: 'Bạn có chắc xóa không?',
+              text: "Bạn sẽ không thể khôi phục điều này!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok, Xóa',
+              cancelButtonText: 'Hủy'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                   window.location.href = url;
+              }
+            })
+        })
+    </script>
+
+
+@endpush

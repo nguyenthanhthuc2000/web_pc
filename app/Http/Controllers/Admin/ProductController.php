@@ -130,68 +130,71 @@ class ProductController extends Controller
         }
 
         $product = Product::find($id);
-        $array = [
-            'name' => $request->name,
-            'slug' => $request->slug,
-            'category_id' => $request->category_id,
-            'remains' => $request->remains,
-            'sold' => $request->sold,
-            'content' => $request->content_pro,
-            'desc' => $request->desc,
-            'price' => $request->price,
-        ];
+        if($product) {
+            $array = [
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'category_id' => $request->category_id,
+                'remains' => $request->remains,
+                'sold' => $request->sold,
+                'content' => $request->content_pro,
+                'desc' => $request->desc,
+                'price' => $request->price,
+            ];
 
-        if($request->file('image1')){
-            //tạo tên mới cho ảnh để k bị trùng
-            $image = substr(md5(microtime()),rand(0,4), 6).'-'.$request->file('image1')->getClientOriginalName();
-            //lưu ảnh vào /upload/products
-            $request->file('image1')->move('upload/products/', $image);
-            $array = $array + array('image1' => $image);
+            if ($request->file('image1')) {
+                //tạo tên mới cho ảnh để k bị trùng
+                $image = substr(md5(microtime()), rand(0, 4), 6) . '-' . $request->file('image1')->getClientOriginalName();
+                //lưu ảnh vào /upload/products
+                $request->file('image1')->move('upload/products/', $image);
+                $array = $array + array('image1' => $image);
 
-            //xóa hình cũ
-            if(File::exists(public_path()."/upload/products/".$product->image1)){
-                File::delete(public_path()."/upload/products/".$product->image1);
+                //xóa hình cũ
+                if (File::exists(public_path() . "/upload/products/" . $product->image1)) {
+                    File::delete(public_path() . "/upload/products/" . $product->image1);
+                }
             }
-        }
-        if($request->file('image2')){
-            $image = substr(md5(microtime()),rand(0,5), 6).'-'.$request->file('image2')->getClientOriginalName();
-            $request->file('image2')->move('upload/products/', $image);
-            $array = $array + array('image2' => $image);
+            if ($request->file('image2')) {
+                $image = substr(md5(microtime()), rand(0, 5), 6) . '-' . $request->file('image2')->getClientOriginalName();
+                $request->file('image2')->move('upload/products/', $image);
+                $array = $array + array('image2' => $image);
 
-            //xóa hình cũ
-            if(File::exists(public_path()."/upload/products/".$product->image2)){
-                File::delete(public_path()."/upload/products/".$product->image2);
+                //xóa hình cũ
+                if (File::exists(public_path() . "/upload/products/" . $product->image2)) {
+                    File::delete(public_path() . "/upload/products/" . $product->image2);
+                }
             }
-        }
-        if($request->file('image3')){
-            $image = substr(md5(microtime()),rand(0,6), 6).'-'.$request->file('image3')->getClientOriginalName();
-            $request->file('image3')->move('upload/products/', $image);
-            $array = $array + array('image3' => $image);
+            if ($request->file('image3')) {
+                $image = substr(md5(microtime()), rand(0, 6), 6) . '-' . $request->file('image3')->getClientOriginalName();
+                $request->file('image3')->move('upload/products/', $image);
+                $array = $array + array('image3' => $image);
 
-            //xóa hình cũ
-            if(File::exists(public_path()."/upload/products/".$product->image3)){
-                File::delete(public_path()."/upload/products/".$product->image3);
+                //xóa hình cũ
+                if (File::exists(public_path() . "/upload/products/" . $product->image3)) {
+                    File::delete(public_path() . "/upload/products/" . $product->image3);
+                }
             }
-        }
-        if($request->file('image4')){
-            $image = substr(md5(microtime()),rand(0,7), 6).'-'.$request->file('image4')->getClientOriginalName();
-            $request->file('image4')->move('upload/products/', $image);
-            $array = $array + array('image4' => $image);
+            if ($request->file('image4')) {
+                $image = substr(md5(microtime()), rand(0, 7), 6) . '-' . $request->file('image4')->getClientOriginalName();
+                $request->file('image4')->move('upload/products/', $image);
+                $array = $array + array('image4' => $image);
 
-            //xóa hình cũ
-            if(File::exists(public_path()."/upload/products/".$product->image4)){
-                File::delete(public_path()."/upload/products/".$product->image4);
+                //xóa hình cũ
+                if (File::exists(public_path() . "/upload/products/" . $product->image4)) {
+                    File::delete(public_path() . "/upload/products/" . $product->image4);
+                }
             }
-        }
-        if( isset($request->title_rules)  && isset($request->rules)){
-            $c = json_encode(array_map(null, $request->title_rules, $request->rules));
-            $array = $array + array('options' => $c);
-        }
+            if (isset($request->title_rules) && isset($request->rules)) {
+                $c = json_encode(array_map(null, $request->title_rules, $request->rules));
+                $array = $array + array('options' => $c);
+            }
 
-        $query = $product->update($array);
-        if($query){
-            return redirect()->route('product.index')->with('success', 'Cập nhật thành công!');
+            $query = $product->update($array);
+            if ($query) {
+                return redirect()->route('product.index')->with('success', 'Cập nhật thành công!');
+            }
+            return redirect()->route('product.index')->with('error', 'Cập nhật thất bại!');
         }
-        return redirect()->route('product.index')->with('error', 'Cập nhật thất bại!');
+        return redirect()->route('product.index')->with('error', 'Không tìm thấy dữ liệu!');
     }
 }

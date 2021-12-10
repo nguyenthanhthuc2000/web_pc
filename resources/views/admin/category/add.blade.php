@@ -53,9 +53,6 @@
                             <div class="form-group">
                                 <label class="form-label w-100">Hình ảnh</label>
                                 <input type="file"  id="input_file_img" name="image" onchange="review_img(event)" hidden>
-                                @error('image')
-                                <span class="error text-danger" >{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="review-img">
                                 <img id="review-img" src="{{asset('/images/noimage.png')}}" style=" width: 100%;    border: 3px dashed blue;">
