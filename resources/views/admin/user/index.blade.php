@@ -72,6 +72,9 @@
                                     @endif
                                     </tbody>
                                 </table>
+                                <div style="float: right" class="mr-4 mt-2">
+                                    {{ $users->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

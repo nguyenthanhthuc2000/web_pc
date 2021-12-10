@@ -45,5 +45,20 @@ Route::prefix('admin')->group(function () {
             Route::post('status','Admin\UserController@status')->name('user.status'); // nổi bật
         });
 
+        Route::prefix('order')->group(function () {
+            Route::get('index','Admin\OrderController@index')->name('order.index');
+            Route::get('detail','Admin\OrderController@detail')->name('order.detail');
+            Route::get('destroy/{id}','Admin\OrderController@destroy')->name('order.destroy'); // xóa
+            Route::post('status','Admin\OrderController@status')->name('order.status'); // cap nhat tt
+        });
+
+        Route::prefix('voucher')->group(function () {
+            Route::get('index','Admin\VoucherController@index')->name('voucher.index');
+            Route::get('add','Admin\VoucherController@add')->name('voucher.add');
+            Route::get('edit','Admin\VoucherController@edit')->name('voucher.edit');
+            Route::get('destroy/{id}','Admin\VoucherController@destroy')->name('voucher.destroy'); // xóa
+            Route::post('status','Admin\VoucherController@status')->name('voucher.status'); // cap nhat tt
+        });
+
     });
 });

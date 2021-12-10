@@ -52,7 +52,14 @@
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Đơn hàng </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
-                        <li><a href="all-rooms.html"> Danh sách </a></li>
+                        <li><a href="{{ route('order.index') }}"> Danh sách </a></li>
+
+                    </ul>
+                </li>
+                <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Mã giảm giá </span> <span class="menu-arrow"></span></a>
+                    <ul class="submenu_class" style="display: none;">
+                        <li><a href="{{ route('voucher.index') }}"> Danh sách  </a></li>
+                        <li><a href="{{ route('voucher.add') }}"> Thêm mới </a></li>
                     </ul>
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Nhân viên </span> <span class="menu-arrow"></span></a>
