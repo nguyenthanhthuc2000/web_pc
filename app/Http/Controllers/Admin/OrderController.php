@@ -10,8 +10,9 @@ use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
-    public function index(){
-        $orders = Order::orderBy('id', 'DESC')->paginate();
+    public function index(Request $request){
+        $orders = Order::orderBy('id', 'DESC')->OrderCode($request)->paginate();
+        $orders->appends(['id' => $request->order_code]);
         return view('admin.order.index', compact('orders'));
     }
 }
