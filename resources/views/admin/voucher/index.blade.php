@@ -42,7 +42,7 @@
                                                     <div>{{$voucher->name}}</div>
                                                 </td>
                                                 <td>{{$voucher->code}}</td>
-                                                <th  class="text-center">{{$voucher->number}}</th>
+                                                <th  class="text-center">{{number_format($voucher->number, 0,',','.')}}</th>
                                                 <th class="text-center">
                                                     @if($voucher->type == 1)
                                                         %
@@ -51,10 +51,10 @@
                                                     @endif
                                                 </th>
                                                 <td class="text-center">
-                                                    {{number_format($voucher->total, 0,' ,',' .')}}
+                                                    {{number_format($voucher->total, 0,',','.')}}
                                                 </td>
                                                 <td  class="text-center">
-                                                    {{$voucher->used}}
+                                                    {{number_format($voucher->used, 0,',','.')}}
                                                 </td>
                                                 <td  class="text-center">
                                                     <input type="checkbox" {{$voucher->status == 1 ? 'checked' : ''}}  class="status" data-id="{{$voucher->id}}">

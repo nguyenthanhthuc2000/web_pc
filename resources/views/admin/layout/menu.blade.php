@@ -19,18 +19,17 @@
                             @else
                                 Nhân viên
                             @endif
-
                         </p>
                     </div>
                 </div> <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a> </div>
         </li>
     </ul>
-    <div class="top-nav-search">
-        <form>
-            <input type="text" class="form-control" placeholder="Search here">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
+{{--    <div class="top-nav-search">--}}
+{{--        <form>--}}
+{{--            <input type="text" class="form-control" placeholder="Search here">--}}
+{{--            <button class="btn" type="submit"><i class="fas fa-search"></i></button>--}}
+{{--        </form>--}}
+{{--    </div>--}}
 </div>
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
@@ -41,7 +40,10 @@
                 <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Danh mục</span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="{{ route('category.index') }}"> Danh sách </a></li>
+
+                        @if(Auth::user()->level == 1)
                         <li><a href="{{ route('category.add') }}"> Thêm mới </a></li>
+                        @endif
                     </ul>
                 </li>
                 <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span>  Sản phẩm  </span> <span class="menu-arrow"></span></a>
@@ -53,21 +55,22 @@
                 <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Đơn hàng </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="{{ route('order.index') }}"> Danh sách </a></li>
-
                     </ul>
                 </li>
+                @if(Auth::user()->level == 1)
                 <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Mã giảm giá </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="{{ route('voucher.index') }}"> Danh sách  </a></li>
                         <li><a href="{{ route('voucher.add') }}"> Thêm mới </a></li>
                     </ul>
                 </li>
-                <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Nhân viên </span> <span class="menu-arrow"></span></a>
-                    <ul class="submenu_class" style="display: none;">
-                        <li><a href="{{ route('user.index') }}">Danh sách </a></li>
-                        <li><a href="{{ route('user.add') }}">Thêm mới </a></li>
-                    </ul>
-                </li>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Nhân viên </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a href="{{ route('user.index') }}">Danh sách </a></li>
+                            <li><a href="{{ route('user.add') }}">Thêm mới </a></li>
+                        </ul>
+                    </li>
+                @endif
                 <li> <a href="{{ route('admin.get.change.pass') }}"><i class="far fa-money-bill-alt"></i> <span>Đổi mật khẩu</span></a> </li>
 
             </ul>
