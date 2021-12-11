@@ -25,7 +25,7 @@
                                 @enderror
                             </div>
                             <div class="checkout__input">
-                                <p>Bạn chưa có tài khoản? <a href="" class="text-primary">Đăng ký</a></p>
+                                <p>Bạn chưa có tài khoản? <a href="{{ route('customer.signin') }}" class="text-primary">Đăng ký</a></p>
                             </div>
                             <div class="checkout__input text-center">
                                 <button class="btn btn-secondary">Đăng nhập</button>

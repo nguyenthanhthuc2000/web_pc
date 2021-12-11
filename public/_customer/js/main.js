@@ -231,4 +231,10 @@
         $button.parent().find('input').val(newVal);
     });
 
+    /*-------------------
+		Active menu
+	--------------------- */
+    $(".header__menu li a").filter(function() {
+        return this.href == location.href;
+    }).parents("li").addClass("active");
 })(jQuery);

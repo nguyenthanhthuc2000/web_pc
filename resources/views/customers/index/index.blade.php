@@ -84,7 +84,7 @@
             @foreach ($category->products as $product)
                 <div class="mix">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{ asset('upload/products/'.$product->image1) }}">
+                        <div class="featured__item__pic set-bg" data-setbg="{{ ($product->image1 != null) ? asset('upload/products/'.$product->image1) : asset('images/noimage.png') }}">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>

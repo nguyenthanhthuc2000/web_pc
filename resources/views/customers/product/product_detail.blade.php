@@ -27,7 +27,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="{{ asset('upload/products/'.$detailsProduct->image1) }}" alt="">
+                                src="{{ ($detailsProduct->image1 != null) ? asset('upload/products/'.$detailsProduct->image1) : asset('images/noimage.png') }}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="{{ asset('upload/products/'.$detailsProduct->image1) }}"

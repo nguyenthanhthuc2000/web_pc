@@ -13,10 +13,12 @@ class ShopController extends Controller
         $listCategory = Category::where('status', 1)->get();
         $listProduct = Product::where('status', 1)->paginate();
         if(isset($request->sort, $request->from, $request->to)){
-            if($request->sort == 0){
-                $listProduct = Product::where('status', 1)->orderBy('price', 'desc')->whereBetween('price', [$request->from, $request->to])->paginate();
+            if($request->sort == 'up'){
+                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate();
             }
-            $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->paginate();
+            else if($request->sort == 'down'){
+                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate();
+            }
         }
         $data = [
             'listCategory' => $listCategory,
@@ -25,10 +27,18 @@ class ShopController extends Controller
         return view('customers.shop.index', $data);
     }
 
-    public function getByCategory($category){
+    public function getByCategory(Request $request, $category){
         $idCategory = Category::where(['status' => 1, 'slug' => $category])->first()->id;
         $listCategory = Category::where('status', 1)->get();
         $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->paginate();
+        if(isset($request->sort, $request->from, $request->to)){
+            if($request->sort == 'up'){
+                $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate();
+            }
+            else if($request->sort == 'down'){
+                $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate();
+            }
+        }
         $data = [
             'listCategory' => $listCategory,
             'listProduct' => $listProduct
