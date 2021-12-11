@@ -8,6 +8,8 @@ use Auth;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\ActicityHistory;
+
 
 class OrderController extends Controller
 {
@@ -53,12 +55,6 @@ class OrderController extends Controller
                     }
 
                 }
-
-//                $arrayHistory = [
-//                    'user_id' => Auth::id(),
-//                    'action' => 'Cập nhật trạng thái hóa đơn ID: '.$order->order_code.' thành: '.$request->txt_status
-//                ];
-//                $this->activityHistoryRepo->create($arrayHistory);
             }
 
             if($request->status ==  3 || $request->status ==  0){
@@ -73,12 +69,14 @@ class OrderController extends Controller
                         $order->update(['check_status' => 0]);
                     }
                 }
-//                $arrayHistory = [
-//                    'user_id' => Auth::id(),
-//                    'action' => 'Cập nhật trạng thái hóa đơn ID: '.$order->order_code.' thành: '.$request->txt_status
-//                ];
-//                $this->activityHistoryRepo->create($arrayHistory);
             }
+
+            $arrayHistory = [
+                'user_id' => Auth::id(),
+                'action' => 'Cập nhật trạng thái hóa đơn ID: '.$order->order_code.' thành: '.$request->txt_status
+            ];
+
+            ActicityHistory::create($arrayHistory);
             return 1;
         }
         return 0;
