@@ -41,7 +41,7 @@
                                 <h4>Giá</h4>
                                 <div class="price-range-wrap">
                                     <div class="range-slider">
-                                        <div class="price-input">
+                                        <div class="price-input d-flex justify-content-between">
                                             <input type="number" id="minamount" min="0" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
                                             <input type="number" id="maxamount" min="0" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
                                         </div>
