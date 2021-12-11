@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ActicityHistory extends Model
 {
     use HasFactory;
+    protected $table = 'activity_history';
+    protected $guarded = [];
+    public $timestamps = true;
+    protected $perPage = 15;
 
-    protected $table = 'acticity_history';
+    public function user(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }
