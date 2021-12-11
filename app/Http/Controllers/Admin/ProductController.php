@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderDetail;
 use File;
 
 class ProductController extends Controller
@@ -96,6 +97,13 @@ class ProductController extends Controller
     public function destroy($id){
 
         $products = Product::find($id);
+
+        $orderDetails = OrderDetail::where('product_id', $id)->get();
+        if($orderDetails->count() > 0){
+            return redirect()->route('product.index')->with('error', 'Sản phẩm  '.$products->name.' đã được bán '.$orderDetails->count().' lần, không thể xóa !');
+        }
+
+
         if($products->delete($id)){
             return redirect()->route('product.index')->with('success', 'Xóa thành công!');
         }

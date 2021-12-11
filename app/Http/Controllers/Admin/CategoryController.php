@@ -108,8 +108,14 @@ class CategoryController extends Controller
 
     public function destroy($id){
 
-        $products = Product::where('category_id', $id)->get();
         $category = Category::find($id);
+        $pros = Product::where('category_id', $id)->get();
+        if($pros->count() > 0){
+            return redirect()->route('product.index')->with('error', 'Có '.$pros->count().' sản phẩm thuộc danh mục '.$category->name.', không thể xóa !');
+        }
+
+
+        $products = Product::where('category_id', $id)->get();
         if($products->count() > 0){
             return redirect()->route('category.index')
                 ->with('error', 'Tồn tại '.$products->count().' sản phẩm thuộc danh mục '.$category->name.', không thể xóa !');

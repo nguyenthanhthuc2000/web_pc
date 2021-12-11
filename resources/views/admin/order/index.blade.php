@@ -91,3 +91,27 @@
     </div>
 @endsection
 
+@push('js')
+    <script>
+
+        //xóa
+        $('.btn-delete').click(function(){
+            var url = $(this).data('url');
+            Swal.fire({
+              title: 'Bạn có chắc xóa không?',
+              text: "Bạn sẽ không thể khôi phục điều này!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok, Xóa',
+              cancelButtonText: 'Hủy'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                   window.location.href = url;
+              }
+            })
+
+        })
+    </script>
+@endpush

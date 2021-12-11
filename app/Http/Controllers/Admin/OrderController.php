@@ -15,4 +15,18 @@ class OrderController extends Controller
         $orders->appends(['id' => $request->order_code]);
         return view('admin.order.index', compact('orders'));
     }
+
+    public function destroy($id){
+        if(Order::find($id)->delete()){
+            OrderDetail::where('order_code', $id)->delete();
+            return redirect()->route('oorder.index')->with('success', 'Xóa thành công!');
+        }
+        return redirect()->route('oorder.index')->with('error', 'Xóa thất bại!');
+    }
+
+    public function detail($id){
+        $order = Order::find($id);
+        return view('admin.order.detail', compact('order'));
+    }
+
 }
