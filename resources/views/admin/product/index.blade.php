@@ -1,4 +1,7 @@
 @extends('admin.layout.content')
+@section('title')
+    Danh sách sản phẩm
+@endsection
 @section('content')
     <div class="page-wrapper">
         <div class="content container-fluid">

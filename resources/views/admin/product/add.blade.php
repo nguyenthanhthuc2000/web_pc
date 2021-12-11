@@ -1,4 +1,7 @@
 @extends('admin.layout.content')
+@section('title')
+    Thêm sản phẩm
+@endsection
 @section('content')
 
     <div class="page-wrapper">

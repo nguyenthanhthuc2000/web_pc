@@ -1,4 +1,5 @@
 @extends('admin.layout.content')
+Chỉnh sửa danh mục {{ $cat->name }}
 @section('content')
     <div class="page-wrapper">
         <div class="content container-fluid">

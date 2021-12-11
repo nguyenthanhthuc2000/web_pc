@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+    Cửa hàng
+@endsection
 @section('content')
     
     <!-- Breadcrumb Section Begin -->

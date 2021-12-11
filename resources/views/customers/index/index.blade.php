@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+ Trang chủ
+@endsection
 @section('content')
 
 <!-- Hero Section Begin -->

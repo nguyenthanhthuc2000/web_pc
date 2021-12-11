@@ -28,10 +28,10 @@
                 </div>
             </td>
             <td class="shoping__cart__total">
-                <?php
+                @php
                     $subtotal = $cart['price'] * $cart['qty'];
                     echo number_format($subtotal, 0,',','.');
-                ?>
+                @endphp
             </td>
             <td class="shoping__cart__item__close">
                 <span class="icon_close" data-id="{{$cart['id']}}"></span>
