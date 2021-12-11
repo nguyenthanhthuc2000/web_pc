@@ -57,6 +57,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="sidebar__item">
+                                <div class="filter__sort">
+                                    <span class="mr-2">Bán chạy</span>
+                                    <input type="checkbox" name="selling" {{ (request()->get('selling') == true) ? 'checked' : '' }}>
+                                </div>
+                            </div>
                             <div class="sidebar__item text-right">
                                 <button class="btn btn-success" type="sunmit">Lọc</button>
                             </div>

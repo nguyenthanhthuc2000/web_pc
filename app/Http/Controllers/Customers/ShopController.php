@@ -12,12 +12,18 @@ class ShopController extends Controller
     public function index(Request $request){
         $listCategory = Category::where('status', 1)->get();
         $listProduct = Product::where('status', 1)->paginate();
-        if(isset($request->sort, $request->from, $request->to)){
+        if(isset($request->sort, $request->from, $request->to, $request->selling)){
             if($request->sort == 'up'){
                 $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate();
+                if($request->selling == true){
+                    $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->where('selling', 1)->paginate();
+                }
             }
             else if($request->sort == 'down'){
                 $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate();
+                if($request->selling == true){
+                    $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->where('selling', 1)->paginate();
+                }
             }
         }
         $data = [
