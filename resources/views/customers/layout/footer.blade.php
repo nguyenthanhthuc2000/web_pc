@@ -6,7 +6,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="{{ route('index') }}"><img src="{{ asset('_customer/img/logo.png') }}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -70,9 +70,11 @@
     <!-- Js Plugins -->
     <script src="/_customer/js/jquery-3.3.1.min.js"></script>
     <script src="/_customer/js/bootstrap.min.js"></script>
+    <script src="/_customer/js/bootstrap.bundle.js"></script>
     <script src="/_customer/js/jquery.nice-select.min.js"></script>
     <script src="/_customer/js/jquery-ui.min.js"></script>
     <script src="/_customer/js/jquery.slicknav.js"></script>
     <script src="/_customer/js/mixitup.min.js"></script>
     <script src="/_customer/js/owl.carousel.min.js"></script>
     <script src="/_customer/js/main.js"></script>
+    @method('script')
