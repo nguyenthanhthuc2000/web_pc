@@ -144,9 +144,9 @@
                                         @if ($comments->count() > 0)
                                             @foreach ($comments as $comment)
                                                 <div class="commented-section mt-2">
-                                                    <div class="d-flex flex-row align-items-center commented-user">
+                                                    {{-- <div class="d-flex flex-row align-items-center commented-user">
                                                         <h5 class="mr-2 font-weight-bold">{{ $comment->name }}:</h5>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="comment-text-sm pl-2">
                                                         <span>{{ $comment->comment }}</span>
                                                     </div>
