@@ -88,3 +88,4 @@ Route::post('load-cart', 'customers\CartController@loadCart')->name('customer.lo
 Route::post('load-cart-total', 'customers\CartController@loadCartTotal')->name('customer.load.cart.total');
 Route::post('update-total', 'customers\CartController@updateTotal')->name('customer.update.total');
 Route::post('add-coupon', 'customers\CartController@addCoupon')->name('customer.add.coupon');
+Route::post('customer-store-order', 'customers\CartController@storeOrder')->name('customer.store.order');
