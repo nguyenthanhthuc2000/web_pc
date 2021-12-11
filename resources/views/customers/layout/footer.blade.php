@@ -148,7 +148,7 @@
                     data:{code:code},
                     success:function(data){
                         if(data.status = 200){
-                           loadCart();
+                            loadCart();
                             loadCartTotal();
                             Swal.fire(
                                 data.message,
@@ -228,6 +228,8 @@
                         x = data.count;
                 		if(x != null){
                             $('.count-cart').text(x);
+                            loadCart();
+                            loadCartTotal();
                 			Swal.fire(
 							  'Thêm giỏ hàng thành công!',
 							  'Tiếp tục mua hàng!',

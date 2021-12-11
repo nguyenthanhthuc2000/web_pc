@@ -84,16 +84,19 @@
                             <?php
                                 $total = 0;
                                 $totalCoupon = 0;
-                                $carts = Session::get('carts');
-                                foreach($carts as $cart){
-                                    $total +=  $cart['qty'] * $cart['price'];
-                                    $totalCoupon +=  $cart['qty'] * $cart['price'];
+                                $giam = 0;
+                                if(Session::has('carts')){
+                                    $carts = Session::get('carts');
+                                    foreach($carts as $cart){
+                                        $total +=  $cart['qty'] * $cart['price'];
+                                        $totalCoupon +=  $cart['qty'] * $cart['price'];
+                                    }
                                 }
 
                                 if(Session::has('counpon_code_session')){
-                                    $coupon = Session::get('counpon_code_session');
                                     $type = '';
                                     $giam = 0;
+                                    $coupon = Session::get('counpon_code_session');
                                     if($coupon[0]['counpon_type'] == 1){
                                         $type = $coupon[0]['counpon_number'].'%';
                                         $giam = ($total/100) * $coupon[0]['counpon_number'];
@@ -111,8 +114,7 @@
                             <div class="checkout__order">
                                 <h4>Hóa đơn</h4>
                                 <div class="checkout__order__products">Hóa đơn <span>{{number_format($total,0,',','.')}} vnđ</span></div>
-
-                                @if(Session::has('counpon_code_session'))
+                                @if(Session::get('counpon_code_session'))
                                     <div class="checkout__order__products">Giảm giá {{$type}}<span>-{{number_format($giam, 0,',','.')}} vnđ</span></div>
                                     <div class="checkout__order__products">Tổng thanh toán<span>{{number_format($totalCoupon, 0,',','.')}} vnđ</span></div>
 
