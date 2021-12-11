@@ -104,12 +104,17 @@
                                     <h6>Chi tiết sản phẩm</h6>
                                     <table class="table">
                                         <tbody class="text-center">
-                                            @foreach (json_decode($detailsProduct->options) as $option)
+                                            @if(count(json_decode($detailsProduct->options)) > 0)
+                                                @foreach (json_decode($detailsProduct->options) as $option)
+                                                    <tr>
+                                                        <th>{{ $option[0] }}</th>
+                                                        <td>{{ $option[1] }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <th>{{ $option[0] }}</th>
-                                                    <td>{{ $option[1] }}</td>
+                                                    <th colspan="2">Không có dữ liệu</th>
                                                 </tr>
-                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
