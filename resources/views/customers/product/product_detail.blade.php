@@ -55,11 +55,17 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" value="1" class="qty_{{$detailsProduct->id}}">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">THÊM VÀO GIỎ HÀNG</a>
+                        <button  class="primary-btn btn-add-cart"
+                             data-id="{{$detailsProduct->id}}"
+                             data-soluong="{{$detailsProduct->remains}}"
+                             data-price="{{$detailsProduct->price}}"
+                             data-route="{{ route('customer.add.cart') }}"
+                            >THÊM VÀO GIỎ HÀNG
+                        </button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>

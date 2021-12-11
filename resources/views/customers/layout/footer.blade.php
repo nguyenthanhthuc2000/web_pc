@@ -77,4 +77,172 @@
     <script src="/_customer/js/mixitup.min.js"></script>
     <script src="/_customer/js/owl.carousel.min.js"></script>
     <script src="/_customer/js/main.js"></script>
+    <script src="/vendor/sweetalert2.min.js"></script>
+
+    <script>
+
+        loadCart();
+        loadCartTotal();
+
+        function loadCart(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+             $.ajax({
+                url: '/load-cart',
+                method:'POST',
+                success:function(data){
+                    $('#box-cart').html(data);
+                }
+            })
+        }
+        function loadCartTotal(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+             $.ajax({
+                url: '/load-cart-total',
+                method:'POST',
+                success:function(data){
+                    $('.shoping__checkout').html(data);
+                }
+            })
+        }
+
+        $(document).on("change", ".pro-cart-qty", function(){
+            var qty = $(this).val();
+            var id = $(this).data('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+             $.ajax({
+                url: '/update-total',
+                method:'POST',
+                data:{id:id, qty:qty},
+                success:function(data){
+                    if(data.status = 200){
+                        loadCart();
+                        loadCartTotal();
+                    }
+                }
+            })
+        })
+
+        $('.btn-add-coupon').click(function(){
+            var code = $('#code').val();
+            if(code != ''){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                 $.ajax({
+                    url: '/add-coupon',
+                    method:'POST',
+                    data:{code:code},
+                    success:function(data){
+                        if(data.status = 200){
+                           loadCart();
+                            loadCartTotal();
+                            Swal.fire(
+                                data.message,
+                              'Cảm ơn bạn!',
+                              'success'
+                            )
+                        }
+                        else{
+                            Swal.fire(
+                              data.message,
+                              'Kiểm tra lại mã giảm giá của bạn!',
+                              'error'
+                            )
+                        }
+                    }
+                })
+            }
+            else{
+                Swal.fire(
+                  'Lỗi',
+                  'Vui lòng nhập mã giảm giá!',
+                  'error'
+                )
+            }
+
+        })
+
+        $(document).on("click",".icon_close",function() {
+            var id = $(this).data('id');
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+             $.ajax({
+                url: '/del-cart',
+                method:'POST',
+                data:{id:id},
+                success:function(data){
+                  loadCart();
+                    loadCartTotal();
+                }
+            })
+        });
+
+
+        $('.btn-add-cart').click(function(){
+
+			var id = $(this).data('id');
+            var route = $(this).data('route');
+            var qty = $('.qty_' +id).val();
+			if( $(this).data('soluong') == '0'){
+    			Swal.fire(
+				  'Sản phẩm đã hết hàng!',
+				  'Vui lòng quay lại sau! Hoặc LH shop để được tư vấn!',
+				  'error'
+				)
+			}
+			else if($(this).data('price') == '0'){
+    			Swal.fire(
+				  'Liên hệ chủ shop!',
+				  'Liên hệ chủ CSKH để được báo giá!',
+				  'error'
+				)
+			}
+			else{
+			    $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+				 $.ajax({
+                	url: route,
+                	method:'POST',
+                	data:{id:id,qty:qty},
+                	success:function(data){
+                        x = data.count;
+                		if(x != null){
+                            $('.count-cart').text(x);
+                			Swal.fire(
+							  'Thêm giỏ hàng thành công!',
+							  'Tiếp tục mua hàng!',
+							  'success'
+							)
+                		}else{
+                			Swal.fire(
+							  'Thất bại!',
+							  'Thử lại sau!',
+							  'error'
+							)
+                		}
+                	}
+                })
+			}
+        })
+    </script>
     @method('script')

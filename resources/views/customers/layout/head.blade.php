@@ -4,6 +4,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>Ogani | Template</title>
 
     <!-- Google Font -->
@@ -18,4 +19,5 @@
     <link rel="stylesheet" href="/_customer/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/_customer/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/_customer/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/sweetalert2.min.css" type="text/css">
 </head>
