@@ -17,11 +17,14 @@ class OrderController extends Controller
     }
 
     public function destroy($id){
-        if(Order::find($id)->delete()){
-            OrderDetail::where('order_code', $id)->delete();
-            return redirect()->route('oorder.index')->with('success', 'Xóa thành công!');
+        $order = Order::find($id);
+        if($order){
+            if($order->delete()){
+                OrderDetail::where('order_code', $id)->delete();
+                return redirect()->route('order.index')->with('success', 'Xóa thành công!');
+            }
         }
-        return redirect()->route('oorder.index')->with('error', 'Xóa thất bại!');
+        return redirect()->route('order.index')->with('error', 'Xóa thất bại!');
     }
 
     public function detail($id){

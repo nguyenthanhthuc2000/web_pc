@@ -20,8 +20,10 @@
 
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
+
     <div class="container">
         <div class="row">
+            @include('notification')
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
                     <table>

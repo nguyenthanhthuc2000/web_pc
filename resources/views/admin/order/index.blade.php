@@ -49,7 +49,7 @@
                                                 {{$order->phone}}
                                             </td>
                                             <td>{{$order->created_at}}</td>
-                                            <td class="text-center">{{$order->total}}</td>
+                                            <td class="text-center">{{number_format($order->total,0,',','.')}}</td>
                                             <td class="text-right">
                                                 @if($order->status == 0)
                                                     Chờ xử lí
