@@ -14,6 +14,10 @@ class Product extends Model
     public $timestamps = true;
     protected $perPage = 5;
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     public function scopeId($query, $request){
         if($request->id){
             $query->where('id', $request->id);

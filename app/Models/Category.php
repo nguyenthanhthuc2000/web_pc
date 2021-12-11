@@ -12,4 +12,9 @@ class Category extends Model
     protected $guarded = [];
     public $timestamps = true;
     protected $perPage = 5;
+
+    public function products()
+   {
+       return $this->hasMany(Product::class);
+   }
 }
