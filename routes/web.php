@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
                     Route::post('update/{id}','Admin\UserController@update')->name('user.update'); //update
                     Route::get('destroy/{id}','Admin\UserController@destroy')->name('user.destroy'); // nổi bật
                     Route::post('status','Admin\UserController@status')->name('user.status'); // nổi bật
+                    Route::get('history','Admin\ActivityHistoryController@index')->name('user.history');// lịch sử hoạt động của nhân viên
                 });
             });
 
@@ -68,24 +69,24 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::get('/', 'customers\IndexController@index')->name('index');
-Route::get('/login', 'customers\AuthController@login')->name('customer.login');
-Route::post('/login', 'customers\AuthController@postLogin')->name('customer.login.post');
-Route::get('/signin', 'customers\AuthController@signin')->name('customer.signin');
-Route::post('/signin', 'customers\AuthController@postSignin')->name('customer.signin.post');
-Route::get('/logout', 'customers\AuthController@logout')->name('customer.logout');
-Route::get('/cart', 'customers\CartController@index')->name('customer.cart');
-Route::get('/product-detail/{slug}', 'customers\ProductController@detail')->name('customer.product.detail');
-Route::post('/comment', 'customers\ProductController@comment')->name('customer.product.comment');
-Route::get('/shop', 'customers\ShopController@index')->name('customer.shop');
-Route::get('/shop/{category}', 'customers\ShopController@getByCategory')->name('customer.shop.category');
-Route::get('/checkout', 'customers\CheckoutController@index')->name('customer.checkout');
+Route::get('/', 'customers\IndexController@index')->name('index');// Trang chủ
+Route::get('/login', 'customers\AuthController@login')->name('customer.login');// Đăng nhập
+Route::post('/login', 'customers\AuthController@postLogin')->name('customer.login.post'); // gửi biểu mẫu đăng nhập
+Route::get('/signin', 'customers\AuthController@signin')->name('customer.signin'); //đăng ký
+Route::post('/signin', 'customers\AuthController@postSignin')->name('customer.signin.post'); // gửi biểu mẫu đăng ký
+Route::get('/logout', 'customers\AuthController@logout')->name('customer.logout'); // đăng xuất
+Route::get('/cart', 'customers\CartController@index')->name('customer.cart'); // trang giỏ hàng
+Route::get('/product-detail/{slug}', 'customers\ProductController@detail')->name('customer.product.detail'); // trang chi tiết sản phẩm
+Route::post('/comment', 'customers\ProductController@comment')->name('customer.product.comment'); // gửi bình luận
+Route::get('/shop', 'customers\ShopController@index')->name('customer.shop'); //trang cảu hàng -  danh sách sản phẩm
+Route::get('/shop/{category}', 'customers\ShopController@getByCategory')->name('customer.shop.category'); // danh achs sản phẩm theo danh mục
+Route::get('/checkout', 'customers\CheckoutController@index')->name('customer.checkout'); //trang tnanh toán
 
 
-Route::post('add-cart', 'customers\CartController@addCart')->name('customer.add.cart');
-Route::post('del-cart', 'customers\CartController@delCart')->name('customer.del.cart');
-Route::post('load-cart', 'customers\CartController@loadCart')->name('customer.load.cart');
-Route::post('load-cart-total', 'customers\CartController@loadCartTotal')->name('customer.load.cart.total');
+Route::post('add-cart', 'customers\CartController@addCart')->name('customer.add.cart'); // thêm sản phẩm vào giỏ hàng
+Route::post('del-cart', 'customers\CartController@delCart')->name('customer.del.cart'); // xóa sản phẩm trong giỏ hàng
+Route::post('load-cart', 'customers\CartController@loadCart')->name('customer.load.cart'); // cập nhật lại giỏ hàng
+Route::post('load-cart-total', 'customers\CartController@loadCartTotal')->name('customer.load.cart.total'); // cập nhật lại giá giỏ hàng
 Route::post('update-total', 'customers\CartController@updateTotal')->name('customer.update.total');
 Route::post('add-coupon', 'customers\CartController@addCoupon')->name('customer.add.coupon');
 Route::post('customer-store-order', 'customers\CartController@storeOrder')->name('customer.store.order');

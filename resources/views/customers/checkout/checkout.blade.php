@@ -24,12 +24,12 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-lg-12">
                     <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
                     </h6>
                 </div>
-            </div> --}}
+            </div>
             <div class="checkout__form">
                 <h4>Thông tin nhận hàng</h4>
                 <form action="{{ route('customer.store.order') }}" method="post">
