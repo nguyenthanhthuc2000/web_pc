@@ -27,9 +27,14 @@ class AuthController extends Controller
         );
         $user = User::where('email', $request->email)->first();
         if($user){
-            if($user->status == 0){
+            if($user->status == 0 ){
                 return back()->with([
                     'error' => 'Tài khoản đã bị khóa',
+                ]);
+            }
+            if( $user->level == 3){
+                return back()->with([
+                    'error' => 'Tài khoản hoặc mật khẩu không chính xác!',
                 ]);
             }
         }

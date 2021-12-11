@@ -62,8 +62,8 @@
                                                 <div class="form-group">
                                                     <label>Hình thức</label>
                                                     <select class="form-control" id="sel1" name="type">
-                                                        <option value="1" {{$voucher->status == 1 ? 'selected' : ''}}>Giảm theo số tiền</option>
-                                                        <option value="0" {{$voucher->status == 0 ? 'selected' : ''}}>Giảm theo phần  trăm</option>
+                                                        <option value="2" {{$voucher->status == 2 ? 'selected' : ''}}>Giảm theo số tiền</option>
+                                                        <option value="1" {{$voucher->status == 1 ? 'selected' : ''}}>Giảm theo phần  trăm</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -59,8 +59,8 @@
                                                 <div class="form-group">
                                                     <label>Hình thức</label>
                                                     <select class="form-control" id="sel1" name="type">
-                                                        <option value="1">Giảm theo số tiền</option>
-                                                        <option value="0">Giảm theo phần  trăm</option>
+                                                        <option value="2">Giảm theo số tiền</option>
+                                                        <option value="1">Giảm theo phần  trăm</option>
                                                     </select>
                                                 </div>
                                             </div>
