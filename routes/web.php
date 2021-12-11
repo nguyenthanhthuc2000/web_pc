@@ -74,3 +74,4 @@ Route::post('/login', 'customers\AuthController@postLogin')->name('customer.logi
 Route::get('/logout', 'customers\AuthController@logout')->name('customer.logout');
 Route::get('/cart', 'customers\CartController@index')->name('customer.cart');
 Route::get('/product-detail/{slug}', 'customers\ProductController@detail')->name('customer.product.detail');
+Route::post('/comment', 'customers\ProductController@comment')->name('customer.product.comment');

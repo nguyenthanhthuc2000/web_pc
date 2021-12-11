@@ -18,6 +18,12 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
+    }
+
     public function scopeId($query, $request){
         if($request->id){
             $query->where('id', $request->id);
