@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+    Giỏ hàng
+@endsection
 @section('content')
    <!-- Breadcrumb Section Begin -->
    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('_customer/img/breadcrumb.jpg') }}">
@@ -29,10 +32,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="shoping__product">Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th class="shoping__product">Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng giá</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -52,10 +55,10 @@
             <div class="col-lg-6">
                 <div class="shoping__continue">
                     <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
+                        <h5>Mã giảm giá</h5>
                         <form >
                             <input type="text" placeholder="Enter your coupon code" id="code">
-                            <button type="button" class="site-btn btn-add-coupon">APPLY COUPON</button>
+                            <button type="button" class="site-btn btn-add-coupon">Áp dụng mã</button>
                         </form>
                     </div>
                 </div>

@@ -12,12 +12,18 @@ class ShopController extends Controller
     public function index(Request $request){
         $listCategory = Category::where('status', 1)->get();
         $listProduct = Product::where('status', 1)->paginate();
-        if(isset($request->sort, $request->from, $request->to)){
+        if(isset($request->sort, $request->from, $request->to, $request->selling)){
             if($request->sort == 'up'){
-                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate();
+                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate(); //sắp theo giá tăng dần
+                if($request->selling == true){
+                    $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->where('selling', 1)->paginate(); // chọn các sản phẩm bán chạy
+                }
             }
             else if($request->sort == 'down'){
-                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate();
+                $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate(); // sắp theo giá giảm dần
+                if($request->selling == true){
+                    $listProduct = Product::where('status', 1)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->where('selling', 1)->paginate(); // chọn các sản phẩm bán chạy
+                }
             }
         }
         $data = [
@@ -30,13 +36,19 @@ class ShopController extends Controller
     public function getByCategory(Request $request, $category){
         $idCategory = Category::where(['status' => 1, 'slug' => $category])->first()->id;
         $listCategory = Category::where('status', 1)->get();
-        $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->paginate();
+        $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->paginate(); // danh sách sản phẩm theo danh mục
         if(isset($request->sort, $request->from, $request->to)){
             if($request->sort == 'up'){
                 $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate();
+                if($request->selling == true){
+                    $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->where('selling', 1)->paginate(); // chọn các sản phẩm bán chạy
+                }
             }
             else if($request->sort == 'down'){
                 $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'desc')->paginate();
+                if($request->selling == true){
+                    $listProduct = Product::where(['status' => 1, 'category_id' => $idCategory])->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->where('selling', 1)->paginate(); // chọn các sản phẩm bán chạy
+                }
             }
         }
         $data = [

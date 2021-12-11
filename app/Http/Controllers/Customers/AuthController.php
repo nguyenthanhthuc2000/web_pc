@@ -15,7 +15,6 @@ class AuthController extends Controller
     }
 
     public function postLogin(Request $request){
-        
         $this->validate($request,
         [
             'user_name' => 'required',
@@ -27,6 +26,10 @@ class AuthController extends Controller
             'password.between' => 'Mật khẩu tối thiểu :min kí tự và tối đa :max',
         ]
         );
+
+        /**------------------------------------------
+        *  Kiểm tra tài khoản có bị khóa hay không
+        ------------------------------------------ */
         $user = User::where('email', $request->user_name)->first();
         if($user){
             if($user->status == 0){
@@ -35,6 +38,9 @@ class AuthController extends Controller
                 ]);
             }
         }
+        /**---------------------
+        *  Kiểm tra đăng nhập
+        --------------------- */
         if (Auth::attempt(['email' => $request->user_name, 'password' => $request->password, 'level' => 3])) {
             return redirect()->route('index');
         }
@@ -63,6 +69,9 @@ class AuthController extends Controller
             'confirm_password.same' => 'Mật khẩu không khớp',
         ]
         );
+        /**------------------------------------------
+        *  Kiểm tra tài khoản có bị trùng hay không
+        ------------------------------------------ */
         $userExists = false;
         $users = User::where('level', 3)->get();
         foreach($users as $u){
@@ -71,10 +80,12 @@ class AuthController extends Controller
                 return $userExists;
             }
         };
+        /**--------------------------
+        *  Không trùng thì đăng ký
+        ---------------------------*/
         if(!$userExists){
-            $password = Hash::make($request->password);
-            $request->merge(['level' => 3, 'password' => $password]);
-            // dd($request->all());
+            $password = Hash::make($request->password); // mã hóa mật khẩu
+            $request->merge(['level' => 3, 'password' => $password]); // lv3 là khách hàng
             $created = User::create($request->except('confirm_password'));
             if($created){
                 return redirect()->route('customer.login')->with([

@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+    Thanh toán
+@endsection
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('_customer/img/breadcrumb.jpg') }}">

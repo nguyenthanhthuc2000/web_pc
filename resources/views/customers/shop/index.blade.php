@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+    Cửa hàng
+@endsection
 @section('content')
     
     <!-- Breadcrumb Section Begin -->
@@ -38,9 +41,9 @@
                                 <h4>Giá</h4>
                                 <div class="price-range-wrap">
                                     <div class="range-slider">
-                                        <div class="price-input">
-                                            <input type="number" id="minamount" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
-                                            <input type="number" id="maxamount" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
+                                        <div class="price-input d-flex justify-content-between">
+                                            <input type="number" id="minamount" min="0" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
+                                            <input type="number" id="maxamount" min="0" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
                                         </div>
                                     </div>
                                 </div>
@@ -52,6 +55,12 @@
                                         <option value="up" {{ (request()->get('sort') == 'up') ? 'selected' : '' }}>Tăng dần</option>
                                         <option value="down" {{ (request()->get('sort') == 'down') ? 'selected' : '' }}>Giảm dần</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="sidebar__item">
+                                <div class="filter__sort">
+                                    <span class="mr-2">Bán chạy</span>
+                                    <input type="checkbox" name="selling" {{ (request()->get('selling') == true) ? 'checked' : '' }}>
                                 </div>
                             </div>
                             <div class="sidebar__item text-right">

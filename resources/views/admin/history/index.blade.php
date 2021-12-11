@@ -1,6 +1,6 @@
 @extends('admin.layout.content')
 @section('title')
-    Đơn hàng
+    Lịch sử hoạt động
 @endsection
 @section('content')
     <div class="page-wrapper">
@@ -9,20 +9,13 @@
                 <div class="row">
                     <div class="col-sm-12 mt-5">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item active">Đơn hàng</li>
+                            <li class="breadcrumb-item active">Lịch sử hoạt động</li>
                         </ul>
                     </div>
                 </div>
             </div>
             @include('notification')
             <div class="row">
-                <div class="top-nav-search" style="margin: 0 0 20px 15px;">
-                    <form style="margin: 0" method="get" action="{{ route('order.index') }}">
-                        @csrf
-                        <input type="text" class="form-control" name="order_code" placeholder="Mã hóa đơn">
-                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
                 <div class="col-md-12 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-body">
@@ -30,18 +23,15 @@
                                 <table class="table table-hover table-center">
                                     <thead>
                                     <tr>
-                                        <th>Mã HD</th>
-                                        <th>Khách hàng</th>
-                                        <th>SĐT</th>
-                                        <th>Ngày dặt</th>
-                                        <th class="text-center">Tổng</th>
-                                        <th class="text-center">Trạng thái</th>
-                                        <th class="text-right">Thao tác</th>
+                                        <th>#</th>
+                                        <th>Nhân viên</th>
+                                        <th>Hoạt động</th>
+                                        <th>Ngày thực hiện</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                    @if($orders->count() > 0)
+                                    {{-- @if($orders->count() > 0)
                                         @foreach($orders as $order)
                                         <tr>
                                             <td class="text-nowrap">
@@ -53,13 +43,13 @@
                                             </td>
                                             <td>{{$order->created_at}}</td>
                                             <td class="text-center">{{number_format($order->total,0,',','.')}}</td>
-                                            <td class="text-center">
+                                            <td class="text-right">
                                                 @if($order->status == 0)
                                                     Chờ xử lí
                                                 @elseif($order->status == 1)
                                                     Đang xử lí
                                                 @elseif($order->status == 2)
-                                                    Hoàn thành
+                                                    Thành công
                                                 @else
                                                     Đã hủy
                                                 @endif
@@ -75,15 +65,15 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="7">
+                                            <th colspan="4">
                                                 Không có dữ liệu
-                                            </td>
+                                            </th>
                                         </tr>
-                                    @endif
+                                    @endif --}}
                                     </tbody>
                                 </table>
                                 <div style="float: right" class="mr-4 mt-2">
-                                    {{ $orders->links() }}
+                                    {{-- {{ $orders->links() }} --}}
                                 </div>
                             </div>
                         </div>

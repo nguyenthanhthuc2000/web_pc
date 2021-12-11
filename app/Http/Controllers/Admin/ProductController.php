@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ActicityHistory;
 use App\Models\OrderDetail;
 use File;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -79,8 +81,13 @@ class ProductController extends Controller
             $c = json_encode(array_map(null, $request->title_rules, $request->rules));
             $array = $array + array('options' => $c);
         }
-        $query = Product::create($array);
-        if($query){
+        $idCreated = Product::create($array)->id;
+        if($idCreated){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Thêm sản phẩm ID: '.$idCreated
+            ];
+            ActicityHistory::create($data);
             return redirect()->route('product.index')->with('success', 'Thêm thành công!');
         }
         return redirect()->route('product.index')->with('error', 'Thêm thất bại!');
@@ -105,6 +112,11 @@ class ProductController extends Controller
 
 
         if($products->delete($id)){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Xóa sản phẩm ID: '.$id
+            ];
+            ActicityHistory::create($data);
             return redirect()->route('product.index')->with('success', 'Xóa thành công!');
         }
         return redirect()->route('product.index')->with('error', 'Xóa thất bại!');
@@ -205,6 +217,11 @@ class ProductController extends Controller
 
             $query = $product->update($array);
             if ($query) {
+                $data = [
+                    'user_id' => Auth::id(),
+                    'action' => 'Chỉnh sửa sản phẩm ID: '.$id
+                ];
+                ActicityHistory::create($data);
                 return redirect()->route('product.index')->with('success', 'Cập nhật thành công!');
             }
             return redirect()->route('product.index')->with('error', 'Cập nhật thất bại!');

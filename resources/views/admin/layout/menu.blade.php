@@ -68,6 +68,7 @@
                         <ul class="submenu_class" style="display: none;">
                             <li><a href="{{ route('user.index') }}">Danh sách </a></li>
                             <li><a href="{{ route('user.add') }}">Thêm mới </a></li>
+                            <li><a href="{{ route('user.history') }}">Lịch sử hoạt động</a></li>
                         </ul>
                     </li>
                 @endif

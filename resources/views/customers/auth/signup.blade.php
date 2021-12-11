@@ -1,4 +1,7 @@
 @extends('customers.layout.main_layout')
+@section('title')
+    Đăng ký
+@endsection
 @section('content')
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
