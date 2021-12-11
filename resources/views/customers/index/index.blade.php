@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>{{ $category->name }}</h2>
+                        <a href=""><h2>{{ $category->name }}</h2></a>
                     </div>
                 </div>
             </div>

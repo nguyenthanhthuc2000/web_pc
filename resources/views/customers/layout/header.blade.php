@@ -65,8 +65,8 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{{ route('index') }}">Trang chủ</a></li>
-                            <li><a href="./shop-grid.html">Của hàng</a></li>
-                            <li><a href="./checkout.html">Thanh toán</a></li>
+                            <li><a href="{{ route('customer.shop') }}">Của hàng</a></li>
+                            <li><a href="{{ route('customer.checkout') }}">Thanh toán</a></li>
                         </ul>
                     </nav>
                 </div>

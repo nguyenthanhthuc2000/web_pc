@@ -75,3 +75,6 @@ Route::get('/logout', 'customers\AuthController@logout')->name('customer.logout'
 Route::get('/cart', 'customers\CartController@index')->name('customer.cart');
 Route::get('/product-detail/{slug}', 'customers\ProductController@detail')->name('customer.product.detail');
 Route::post('/comment', 'customers\ProductController@comment')->name('customer.product.comment');
+Route::get('/shop', 'customers\ShopController@index')->name('customer.shop');
+Route::get('/shop/{category}', 'customers\ShopController@getByCategory')->name('customer.shop.category');
+Route::get('/checkout', 'customers\CheckoutController@index')->name('customer.checkout');

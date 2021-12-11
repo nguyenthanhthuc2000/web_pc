@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'product';
     protected $guarded = [];
     public $timestamps = true;
-    protected $perPage = 5;
+    protected $perPage = 9;
 
     public function category()
     {

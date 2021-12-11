@@ -9,7 +9,7 @@
                         <h2>{{ $detailsProduct->name }}</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ route('index') }}">Trang chủ</a>
-                            <a href="./index.html">{{ $detailsProduct->category->name }}</a>
+                            <a href="{{ route('index')  }}">{{ $detailsProduct->category->name }}</a>
                             <span>{{ $detailsProduct->name }}</span>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Thông tin sản phẩm</h6></h6>
-                                    <p>{{ $detailsProduct->content }}</p>
+                                    <p>{!! $detailsProduct->content !!}</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">

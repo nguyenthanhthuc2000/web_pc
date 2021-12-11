@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index(){
-        $listCategory = Category::where('status', 1)->paginate();
-        $listProduct = Product::where('status', 1)->paginate();
+        $listCategory = Category::where('status', 1)->get();
+        $listProduct = Product::where('status', 1)->get();
         // dd($listCategory);
         $data = [
             'listCategory' => $listCategory,

@@ -1115,7 +1115,7 @@ ol {
 -----------------------*/
 
 .sidebar__item {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
 .sidebar__item.sidebar__item__color--option {
@@ -1159,23 +1159,31 @@ ol {
     position: relative;
 }
 
-.price-range-wrap .range-slider .price-input:after {
-    position: absolute;
-    left: 38px;
-    top: 13px;
-    height: 1px;
-    width: 5px;
-    background: #dd2222;
-    content: "";
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .price-range-wrap .range-slider .price-input input {
     font-size: 16px;
     color: #dd2222;
+    border: 1px solid #ffbcbc;
+    border-radius: 5px;
     font-weight: 700;
-    max-width: 20%;
-    border: none;
+    padding: 5px;
+    padding-bottom: 7px;
     display: inline-block;
+    width: calc(50% - 10px);
+}
+
+.price-range-wrap .range-slider .price-input input::placeholder {
+    font-weight: normal;
+    font-size: 12px;
 }
 
 .price-range-wrap .price-range {
@@ -1661,10 +1669,9 @@ ol {
 }
 
 .product__pagination a,
+.product__pagination span,
 .blog__pagination a {
     display: inline-block;
-    width: 30px;
-    height: 30px;
     border: 1px solid #b2b2b2;
     font-size: 14px;
     color: #b2b2b2;
@@ -1680,14 +1687,15 @@ ol {
 }
 
 .product__pagination a:hover,
+.product__pagination li.page-item.active span,
 .blog__pagination a:hover {
     background: #7fad39;
     border-color: #7fad39;
     color: #ffffff;
 }
 
-.product__pagination a:last-child,
-.blog__pagination a:last-child {
+.product__pagination li:last-child,
+.blog__pagination li:last-child {
     margin-right: 0;
 }
 
