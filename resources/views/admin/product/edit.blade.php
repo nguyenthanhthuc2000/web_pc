@@ -9,7 +9,7 @@
                     <div class="d-flex" style="justify-content: space-between">
                         <div class=" mt-5">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
+                                <li class="breadcrumb-item active">Chỉnh sửa sản phẩm</li>
                             </ul>
                         </div>
                         <div class=" mt-5">
@@ -179,6 +179,8 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="list-rule">
+
+                                                    @if($options != null)
                                                         @foreach($options as $option)
                                                             <tr class="mt-2">
                                                                 <td>
@@ -194,6 +196,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
+                                                    @endif
                                                     </tbody>
                                                 </table>
                                                 <br>

@@ -12,4 +12,11 @@ class Order extends Model
     protected $guarded = [];
     public $timestamps = true;
     protected $perPage = 5;
+
+    public function scopeOrderCode($query, $request){
+        if($request->id){
+            $query->where('order_code', $request->order_code);
+        }
+        return $query;
+    }
 }

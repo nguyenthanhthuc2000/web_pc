@@ -11,8 +11,10 @@ use File;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $pros = Product::orderBy('id', 'DESC')->paginate();
+    public function index(Request $request){
+        $pros = Product::orderBy('id', 'DESC')->Id($request)->paginate();
+        $pros->appends(['id' => $request->id]);
+
         return view('admin.product.index', compact('pros'));
     }
 
@@ -187,6 +189,10 @@ class ProductController extends Controller
             if (isset($request->title_rules) && isset($request->rules)) {
                 $c = json_encode(array_map(null, $request->title_rules, $request->rules));
                 $array = $array + array('options' => $c);
+            }
+
+            if(!isset($request->title_rules)){
+                $array = $array + array('options' => '');
             }
 
             $query = $product->update($array);

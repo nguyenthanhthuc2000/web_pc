@@ -17,8 +17,9 @@
             @include('notification')
             <div class="row">
                 <div class="top-nav-search" style="margin: 0 0 20px 15px;">
-                    <form style="margin: 0">
-                        <input type="text" class="form-control" placeholder="Search here">
+                    <form style="margin: 0" method="get" action="{{ route('product.index') }}">
+                        @csrf
+                        <input type="text" class="form-control" name="id" placeholder="ID sản phẩm">
                         <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
