@@ -91,7 +91,19 @@
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><button href="#"><i class="fa fa-shopping-cart"></i></button></li>
+                                <li>
+                                    <form action="">
+                                        <input type="text" value="1" class="qty_{{$product->id}}" hidden>
+                                        <a type="button" class="btn-add-cart"
+                                                data-id="{{$product->id}}"
+                                                data-soluong="{{$product->remains}}"
+                                                data-price="{{$product->price}}"
+                                                data-route="{{ route('customer.add.cart') }}"
+                                        >
+                                            <i class="fa fa-shopping-cart "></i>
+                                        </a>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
