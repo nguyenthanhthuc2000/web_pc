@@ -195,7 +195,7 @@ class CartController extends Controller
                         $order_detail->voucher_id = $counpon[0]['counpon_id'];
 
                     }
-                    $content .= '<p>'.$product->name. ' --- giá: '.number_format($cart['price'], 0,',','.').' vnđ --- số lượng:'.$cart['qty'].'</p>';
+                    $content .= '<p>Mã: '.$cart['id'].' --- '.$product->name. ' --- giá: '.number_format($cart['price'], 0,',','.').' vnđ --- số lượng:'.$cart['qty'].'</p>';
 
                     $order_detail->save();
                 }
