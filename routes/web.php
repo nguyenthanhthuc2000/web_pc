@@ -7,12 +7,13 @@ Route::prefix('admin')->group(function () {
     Route::get('login','Admin\AuthController@login')->name('admin.login');
     Route::get('logout','Admin\AuthController@logout')->name('admin.logout');
     Route::post('post-login','Admin\AuthController@postLogin')->name('admin.post.login');
+
     Route::middleware('checkAdmin')->group(function () {
         Route::middleware('auth')->group(function () {
+            Route::get('/','Admin\AdminController@dashboard')->name('admin.dashboard');
             Route::get('change-password','Admin\AuthController@getChangePass')->name('admin.get.change.pass');
             Route::post('change-password','Admin\AuthController@postChangePass')->name('admin.post.change.pass');
             Route::get('dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
-            Route::get('/','Admin\AdminController@dashboard')->name('admin.dashboard');
 
             Route::prefix('category')->group(function () {
                 Route::get('index','Admin\CategoryController@index')->name('category.index');
@@ -48,7 +49,7 @@ Route::prefix('admin')->group(function () {
 
             Route::prefix('order')->group(function () {
                 Route::get('index','Admin\OrderController@index')->name('order.index');
-                Route::get('detail','Admin\OrderController@detail')->name('order.detail');
+                Route::get('detail/{id}','Admin\OrderController@detail')->name('order.detail');
                 Route::get('destroy/{id}','Admin\OrderController@destroy')->name('order.destroy')->middleware(CheckLevel::class); // xóa
                 Route::post('status','Admin\OrderController@status')->name('order.status'); // cap nhat tt
             });

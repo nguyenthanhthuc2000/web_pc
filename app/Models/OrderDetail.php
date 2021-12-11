@@ -12,4 +12,12 @@ class OrderDetail extends Model
     protected $guarded = [];
     public $timestamps = true;
     protected $perPage = 5;
+
+    public function product(){
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+    public function voucher(){
+        return $this->hasOne(Voucher::class, 'id', 'voucher_id');
+    }
+
 }

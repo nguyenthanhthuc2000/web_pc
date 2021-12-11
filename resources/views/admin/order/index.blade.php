@@ -50,13 +50,13 @@
                                             </td>
                                             <td>{{$order->created_at}}</td>
                                             <td class="text-center">{{number_format($order->total,0,',','.')}}</td>
-                                            <td class="text-right">
+                                            <td class="text-center">
                                                 @if($order->status == 0)
                                                     Chờ xử lí
                                                 @elseif($order->status == 1)
                                                     Đang xử lí
                                                 @elseif($order->status == 2)
-                                                    Thành công
+                                                    Hoàn thành
                                                 @else
                                                     Đã hủy
                                                 @endif

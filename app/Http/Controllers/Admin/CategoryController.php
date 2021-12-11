@@ -47,7 +47,7 @@ class CategoryController extends Controller
             'slug' => $request->slug,
         );
         if($request->file('image')){
-            $image = substr(md5(microtime()),rand(0,9), 6).'-'.$request->file('image')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,9), 10).'.'.$request->file('image')->getClientOriginalExtension();
             $request->file('image')->move('upload/category/', $image);
             $array = $array + array('image' => $image);
         }
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             'slug' => $request->slug,
         );
         if($request->file('image')){
-            $image = substr(md5(microtime()),rand(0,9), 6).'-'.$request->file('image')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,9), 10).'.'.$request->file('image')->getClientOriginalExtension();
 
             //xóa hình cũ
             if(File::exists(public_path()."/upload/category/".$cat->image)){

@@ -135,8 +135,8 @@
                                             @csrf
                                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                                                 <input type="text" class="form-control mr-3" placeholder="Nội dung bình luận" name="comment">
-                                                <button class="btn btn-primary" type="sunmit">Gửi</button>   
-                                            </div>         
+                                                <button class="btn btn-primary" type="sunmit">Gửi</button>
+                                            </div>
                                             @error('comment')
                                                 <i class="error text-danger">{{ $message }}</i>
                                             @enderror

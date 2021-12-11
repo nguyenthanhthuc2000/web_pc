@@ -55,23 +55,23 @@ class ProductController extends Controller
 
         if($request->file('image1')){
             //tạo tên mới cho ảnh để k bị trùng
-            $image = substr(md5(microtime()),rand(0,4), 6).'-'.$request->file('image1')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,4), 10).'.'.$request->file('image1')->getClientOriginalExtension();
             //lưu ảnh vào /upload/products
             $request->file('image1')->move('upload/products/', $image);
             $array = $array + array('image1' => $image);
         }
         if($request->file('image2')){
-            $image = substr(md5(microtime()),rand(0,5), 6).'-'.$request->file('image2')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,5), 10).'.'.$request->file('image2')->getClientOriginalExtension();
             $request->file('image2')->move('upload/products/', $image);
             $array = $array + array('image2' => $image);
         }
         if($request->file('image3')){
-            $image = substr(md5(microtime()),rand(0,6), 6).'-'.$request->file('image3')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,6), 10).'.'.$request->file('image3')->getClientOriginalExtension();
             $request->file('image3')->move('upload/products/', $image);
             $array = $array + array('image3' => $image);
         }
         if($request->file('image4')){
-            $image = substr(md5(microtime()),rand(0,7), 6).'-'.$request->file('image4')->getClientOriginalName();
+            $image = substr(md5(microtime()),rand(0,7), 10).'.'.$request->file('image4')->getClientOriginalExtension();
             $request->file('image4')->move('upload/products/', $image);
             $array = $array + array('image4' => $image);
         }
@@ -154,7 +154,7 @@ class ProductController extends Controller
 
             if ($request->file('image1')) {
                 //tạo tên mới cho ảnh để k bị trùng
-                $image = substr(md5(microtime()), rand(0, 4), 6) . '-' . $request->file('image1')->getClientOriginalName();
+                $image = substr(md5(microtime()), rand(0, 4), 10) . '.' . $request->file('image1')->getClientOriginalExtension();
                 //lưu ảnh vào /upload/products
                 $request->file('image1')->move('upload/products/', $image);
                 $array = $array + array('image1' => $image);
@@ -165,7 +165,7 @@ class ProductController extends Controller
                 }
             }
             if ($request->file('image2')) {
-                $image = substr(md5(microtime()), rand(0, 5), 6) . '-' . $request->file('image2')->getClientOriginalName();
+                $image = substr(md5(microtime()), rand(0, 5), 10) . '.' . $request->file('image2')->getClientOriginalExtension();
                 $request->file('image2')->move('upload/products/', $image);
                 $array = $array + array('image2' => $image);
 
@@ -175,7 +175,7 @@ class ProductController extends Controller
                 }
             }
             if ($request->file('image3')) {
-                $image = substr(md5(microtime()), rand(0, 6), 6) . '-' . $request->file('image3')->getClientOriginalName();
+                $image = substr(md5(microtime()), rand(0, 6), 10) . '.' . $request->file('image3')->getClientOriginalExtension();
                 $request->file('image3')->move('upload/products/', $image);
                 $array = $array + array('image3' => $image);
 
@@ -185,7 +185,7 @@ class ProductController extends Controller
                 }
             }
             if ($request->file('image4')) {
-                $image = substr(md5(microtime()), rand(0, 7), 6) . '-' . $request->file('image4')->getClientOriginalName();
+                $image = substr(md5(microtime()), rand(0, 7), 6) . '.' . $request->file('image4')->getClientOriginalExtension();
                 $request->file('image4')->move('upload/products/', $image);
                 $array = $array + array('image4' => $image);
 

@@ -231,8 +231,8 @@ class CartController extends Controller
                 Session::forget('totalSession');
                 return  redirect()->route('customer.cart')->with('success', 'Đặt hàng thành công, chúng tôi sẽ liên hệ với bạn trong khoảng thời gian sớm nhất!');
             }
-            return redirect()->route('customer.cart')->with('error', 'Lỗi, vui lòng thử lại!');
+            return redirect()->route('customer.cart')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng!');
         }
-        return redirect()->route('customer.login');
+        return redirect()->route('customer.login')->with('error', 'Vui lòng đăng nhập!');
     }
 }
