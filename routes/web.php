@@ -71,6 +71,8 @@ Route::prefix('admin')->group(function () {
 Route::get('/', 'customers\IndexController@index')->name('index');
 Route::get('/login', 'customers\AuthController@login')->name('customer.login');
 Route::post('/login', 'customers\AuthController@postLogin')->name('customer.login.post');
+Route::get('/signin', 'customers\AuthController@signin')->name('customer.signin');
+Route::post('/signin', 'customers\AuthController@postSignin')->name('customer.signin.post');
 Route::get('/logout', 'customers\AuthController@logout')->name('customer.logout');
 Route::get('/cart', 'customers\CartController@index')->name('customer.cart');
 Route::get('/product-detail/{slug}', 'customers\ProductController@detail')->name('customer.product.detail');

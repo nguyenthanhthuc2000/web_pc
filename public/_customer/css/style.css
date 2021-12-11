@@ -2317,6 +2317,11 @@ input[type=number] {
     margin-top: 10px;
 }
 
+.comment-text-sm {
+    border-bottom: 1px solid #cccccc;
+    padding: 10px;
+}
+
 
 /*---------------------
   Blog

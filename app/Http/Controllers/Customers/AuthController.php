@@ -15,6 +15,7 @@ class AuthController extends Controller
     }
 
     public function postLogin(Request $request){
+        
         $this->validate($request,
         [
             'user_name' => 'required',
@@ -39,6 +40,50 @@ class AuthController extends Controller
         }
         return back()->with([
             'error' => 'Tài khoản hoặc mật khẩu không chính xác',
+        ]);
+    }
+
+    public function signin(){
+        return view('customers.auth.signup');
+    }
+
+    public function postSignin(Request $request){
+        $this->validate($request,
+        [
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'password' => 'required|between:3,32',
+            'confirm_password' => 'same:password|between:3,32',
+        ],
+        [
+            '*.required' => 'Trường không thể bỏ trống',
+            'password.between' => 'Mật khẩu tối thiểu :min kí tự và tối đa :max',
+            'confirm_password.same' => 'Mật khẩu không khớp',
+        ]
+        );
+        $userExists = false;
+        $users = User::where('level', 3)->get();
+        foreach($users as $u){
+            if($u->email == $request->email){
+                $userExists = true;
+                return $userExists;
+            }
+        };
+        if(!$userExists){
+            $password = Hash::make($request->password);
+            $request->merge(['level' => 3, 'password' => $password]);
+            // dd($request->all());
+            $created = User::create($request->except('confirm_password'));
+            if($created){
+                return redirect()->route('customer.login')->with([
+                    'success' => 'Đăng ký thành công',
+                ]);
+            }
+        }
+        return back()->with([
+            'error' => 'Email đã được đăng ký',
         ]);
     }
 

@@ -39,8 +39,8 @@
                                 <div class="price-range-wrap">
                                     <div class="range-slider">
                                         <div class="price-input">
-                                            <input type="number" id="minamount" placeholder="Giá thấp nhất" name="from">
-                                            <input type="number" id="maxamount" placeholder="Giá cao nhất" name="to">
+                                            <input type="number" id="minamount" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
+                                            <input type="number" id="maxamount" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
                                         </div>
                                     </div>
                                 </div>
@@ -49,8 +49,8 @@
                                 <div class="filter__sort">
                                     <span>Sắp xếp</span>
                                     <select name="sort">
-                                        <option value="0">Tăng dần</option>
-                                        <option value="1">Giảm dần</option>
+                                        <option value="up" {{ (request()->get('sort') == 'up') ? 'selected' : '' }}>Tăng dần</option>
+                                        <option value="down" {{ (request()->get('sort') == 'down') ? 'selected' : '' }}>Giảm dần</option>
                                     </select>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                         @foreach ($listProduct as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ asset('upload/products/'.$product->image1) }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ ($product->image1 != null) ? asset('upload/products/'.$product->image1) : asset('images/noimage.png') }}">
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -82,7 +82,7 @@
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="{{ $product->slug }}">{{ $product->name }}</a></h6>
+                                        <h6><a href="{{ route('customer.product.detail', $product->slug) }}">{{ $product->name }}</a></h6>
                                         <h5>{{ number_format($product->price, 0,',','.') }} VNĐ</h5>
                                     </div>
                                 </div>
