@@ -11,6 +11,7 @@ use App\Models\Voucher;
 use App\Models\OrderDetail;
 use App\Models\Order;
 use Mail;
+use Auth;
 
 class CartController extends Controller
 {
@@ -142,90 +143,96 @@ class CartController extends Controller
     }
 
     public function storeOrder(Request $request){
-        $this->validate($request,
-            [
-                'name' => ['required'],
-                'email' => ['required'],
-                'address' => ['required'],
-                'phone' => ['required', 'max:12', 'min:10'],
-            ],
-            [
-                'name.required' => 'Vui lòng nhập tên',
-                'email.required' =>  'Vui lòng nhập địa chỉ email',
-                'address.required' =>  'Vui lòng nhập địa chỉ nhận hàng',
-                'phone.required' =>  'Vui lòng nhập số điện thoại',
-                'phone.max' =>  'Sai định dạng',
-                'phone.min' =>  'Sai định dạng',
-            ],
-        );
+        if(Auth::check()){
+            $this->validate($request,
+                [
+                    'name' => ['required'],
+                    'email' => ['required'],
+                    'address' => ['required'],
+                    'phone' => ['required', 'max:12', 'min:10'],
+                ],
+                [
+                    'name.required' => 'Vui lòng nhập tên',
+                    'email.required' =>  'Vui lòng nhập địa chỉ email',
+                    'address.required' =>  'Vui lòng nhập địa chỉ nhận hàng',
+                    'phone.required' =>  'Vui lòng nhập số điện thoại',
+                    'phone.max' =>  'Sai định dạng',
+                    'phone.min' =>  'Sai định dạng',
+                ],
+            );
 
-        if(Session::get('carts')){
-            $order_code = 'MHD'.substr(md5(microtime()),rand(0,10),10);
+            if(Session::get('carts')){
+                $order_code = 'MHD'.substr(md5(microtime()),rand(0,10),10);
 
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $data = $request->all();
-            $Order = new Order();
-            $Order->order_code = $order_code;
-            $Order->name = $data['name'];
-            $Order->address = $data['address'];
-            $Order->phone = $data['phone'];
-            $Order->email = $data['email'];
-            $Order->note = $data['note'];
-            $Order->total = Session::get('totalSession');
-            $Order->save();
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $data = $request->all();
+                $Order = new Order();
+                $Order->order_code = $order_code;
+                $Order->name = $data['name'];
+                $Order->address = $data['address'];
+                $Order->phone = $data['phone'];
+                $Order->email = $data['email'];
+                $Order->note = $data['note'];
+                $Order->total = Session::get('totalSession');
+                $Order->save();
 
-            $content = '';
-            $total = Session::get('total');
-            $giam = 0;
-            if(Session::has('giam')){
-                $giam = Session::get('giam');
-            }
-
-
-            foreach (Session::get('carts') as $key => $cart) {
-                $order_detail = new OrderDetail();
-                $product = Product::find($cart['id']);
-                $order_detail->order_code = $order_code;
-                $order_detail->product_id = $cart['id'];
-                $order_detail->quantily = $cart['qty'];
-                if(Session::has('counpon_code_session')){
-                    $counpon = Session::get('counpon_code_session');
-                    $order_detail->voucher_id = $counpon[0]['counpon_id'];
-
+                $content = '';
+                $total = Session::get('total');
+                $giam = 0;
+                if(Session::has('giam')){
+                    $giam = Session::get('giam');
                 }
-                $content .= '<p>'.$product->name. ' --- số lượng:'.$cart['qty'].'</p>';
 
-                $order_detail->save();
+
+                foreach (Session::get('carts') as $key => $cart) {
+                    $order_detail = new OrderDetail();
+                    $product = Product::find($cart['id']);
+                    $order_detail->order_code = $order_code;
+                    $order_detail->product_id = $cart['id'];
+                    $order_detail->quantily = $cart['qty'];
+                    if(Session::has('counpon_code_session')){
+                        $counpon = Session::get('counpon_code_session');
+                        $order_detail->voucher_id = $counpon[0]['counpon_id'];
+
+                    }
+                    $content .= '<p>'.$product->name. ' --- giá: '.number_format($cart['price'], 0,',','.').' vnđ --- số lượng:'.$cart['qty'].'</p>';
+
+                    $order_detail->save();
+                }
+
+                if(Session::has('counpon_code_session')){
+                    $voucher = Voucher::find($counpon[0]['counpon_id']);
+                    $array = [
+                        'total' => $voucher->total - 1,
+                        'used' => $voucher->used + 1
+                    ];
+                    $voucher->update($array);
+                }
+
+                $title = 'Xác nhận đơn hàng của bạn từ MIENTAY.COM';
+                $email = $data['email'];
+
+                Mail::send('customers.checkout.mail',
+                    array(
+                        'content' => $content,
+                        'total' => $total,
+                        'giam' => $giam,
+                        'name' => $data['name'],
+                        'address' => $data['address']
+                    ),
+                    function ($message) use ($email, $title) {
+                        $message->to($email, $title)->subject($title);
+                    });
+
+                Session::forget('counpon_code_session');
+                Session::forget('carts');
+                Session::forget('total');
+                Session::forget('giam');
+                Session::forget('totalSession');
+                return  redirect()->route('customer.cart')->with('success', 'Đặt hàng thành công, chúng tôi sẽ liên hệ với bạn trong khoảng thời gian sớm nhất!');
             }
-
-            if(Session::has('counpon_code_session')){
-                $voucher = Voucher::find($counpon[0]['counpon_id']);
-                $array = [
-                    'total' => $voucher->total - 1,
-                    'used' => $voucher->used + 1
-                ];
-                $voucher->update($array);
-            }
-
-            $title = 'Xác nhận đơn hàng của bạn từ MIENTAY.COM';
-            $email = $data['email'];
-
-            Mail::send('customers.checkout.mail',
-                array(
-                    'content' => $content,
-                    'total' => $total,
-                    'giam' => $giam,
-                    'name' => $data['name'],
-                    'address' => $data['address']
-                ),
-                function ($message) use ($email, $title) {
-                    $message->to($email, $title)->subject($title);
-                });
-
-            Session::forget('counpon_code_session');
-            Session::forget('carts');
-            return  redirect()->route('customer.cart')->with('success', 'Đặt hàng thành công, chúng tôi sẽ liên hệ với bạn trong khoảng thời gian sớm nhất!');
+            return redirect()->route('customer.cart')->with('error', 'Lỗi, vui lòng thử lại!');
         }
-        return redirect()->route('customer.cart')->with('error', 'Lỗi, vui lòng thử lại!');
+        return redirect()->route('customer.login');
     }
 }
