@@ -60,10 +60,10 @@
                             </div>
                         </div>
                         <button  class="primary-btn btn-add-cart"
-                             data-id="{{$detailsProduct->id}}"
-                             data-soluong="{{$detailsProduct->remains}}"
-                             data-price="{{$detailsProduct->price}}"
-                             data-route="{{ route('customer.add.cart') }}"
+                                data-id="{{$detailsProduct->id}}"
+                                data-soluong="{{$detailsProduct->remains}}"
+                                data-price="{{$detailsProduct->price}}"
+                                data-route="{{ route('customer.add.cart') }}"
                             >THÊM VÀO GIỎ HÀNG
                         </button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
@@ -104,7 +104,7 @@
                                     <h6>Chi tiết sản phẩm</h6>
                                     <table class="table">
                                         <tbody class="text-center">
-                                            @if(count(json_decode($detailsProduct->options)) > 0)
+                                            @if(json_decode($detailsProduct->options) != null)
                                                 @foreach (json_decode($detailsProduct->options) as $option)
                                                     <tr>
                                                         <th>{{ $option[0] }}</th>
@@ -128,11 +128,10 @@
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Bình luận với tư cách {{ Auth::user()->name }}</h6>
+                                    <h6>Bình luận</h6>
                                     <div class="coment-bottom bg-white p-2 px-4">
                                         <form action="{{ route('customer.product.comment') }}" method="post">
                                             <input type="hidden" value="{{ $detailsProduct->id }}"name="product_id">
-                                            <input type="hidden" value="{{ Auth::user()->name }}"name="name">
                                             @csrf
                                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                                                 <input type="text" class="form-control mr-3" placeholder="Nội dung bình luận" name="comment">
