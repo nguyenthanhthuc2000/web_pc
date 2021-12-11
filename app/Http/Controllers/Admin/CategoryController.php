@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ActicityHistory;
 use File;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -52,8 +54,13 @@ class CategoryController extends Controller
             $array = $array + array('image' => $image);
         }
 
-        $insert = Category::create($array);
+        $insert = Category::create($array)->id;
         if($insert){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Thêm danh mục ID: '.$insert
+            ];
+            ActicityHistory::create($data);
             return redirect()->route('category.index')->with('success', 'Thêm thành công!');
         }
         return redirect()->route('category.index')->with('error', 'Thêm thất bại!');
@@ -101,6 +108,11 @@ class CategoryController extends Controller
 
         $cat->update($array);
         if($cat){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Chỉnh sửa danh mục ID: '.$id
+            ];
+            ActicityHistory::create($data);
             return redirect()->route('category.index')->with('success', 'Cập nhật thành công!');
         }
         return redirect()->route('category.index')->with('error', 'Cập nhật thất bại!');
@@ -127,6 +139,11 @@ class CategoryController extends Controller
     }
 
     public function status(Request $request){
+        $data = [
+            'user_id' => Auth::id(),
+            'action' => 'Cập nhập trạng thái danh mục ID: '.$request->id
+        ];
+        ActicityHistory::create($data);
         $category = Category::find($request->id)->update(['status' => $request->status]);
     }
 }

@@ -31,36 +31,17 @@
                                     </thead>
                                     <tbody>
 
-                                    {{-- @if($orders->count() > 0)
-                                        @foreach($orders as $order)
+                                    @if($listHistory->count() > 0)
+                                        @foreach($listHistory as $history)
                                         <tr>
-                                            <td class="text-nowrap">
-                                                <div>{{strtoupper($order->order_code)}}</div>
-                                            </td>
-                                            <td >{{$order->name}}</td>
+                                            <th>
+                                                {{ $history->id }}
+                                            </th>
+                                            <td >{{$history->user->name }}</td>
                                             <td>
-                                                {{$order->phone}}
+                                                {{$history->action}}
                                             </td>
-                                            <td>{{$order->created_at}}</td>
-                                            <td class="text-center">{{number_format($order->total,0,',','.')}}</td>
-                                            <td class="text-right">
-                                                @if($order->status == 0)
-                                                    Chờ xử lí
-                                                @elseif($order->status == 1)
-                                                    Đang xử lí
-                                                @elseif($order->status == 2)
-                                                    Thành công
-                                                @else
-                                                    Đã hủy
-                                                @endif
-                                            </td>
-                                            <td class="text-right">
-                                                <a href="{{ route('order.detail', $order->id) }}" class=" btn-border btn-custom  btn btn-warning">Xem</a>
-                                                <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
-                                                        data-url="{{ route('order.destroy', $order->id) }}"
-                                                >Xóa
-                                                </button>
-                                            </td>
+                                            <td>{{$history->created_at}}</td>
                                         </tr>
                                         @endforeach
                                     @else
@@ -69,11 +50,11 @@
                                                 Không có dữ liệu
                                             </th>
                                         </tr>
-                                    @endif --}}
+                                    @endif
                                     </tbody>
                                 </table>
                                 <div style="float: right" class="mr-4 mt-2">
-                                    {{-- {{ $orders->links() }} --}}
+                                    {{ $listHistory->links() }}
                                 </div>
                             </div>
                         </div>

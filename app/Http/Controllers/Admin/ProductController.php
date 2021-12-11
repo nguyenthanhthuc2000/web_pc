@@ -95,10 +95,20 @@ class ProductController extends Controller
     }
 
     public function status(Request $request){
+        $data = [
+            'user_id' => Auth::id(),
+            'action' => 'Cập nhật trạng thái sản phẩm ID: '.$request->id
+        ];
+        ActicityHistory::create($data);
         $category = Product::find($request->id)->update(['status' => $request->status]);
     }
 
     public function selling(Request $request){
+        $data = [
+            'user_id' => Auth::id(),
+            'action' => 'Cập nhật trạng thái bán chạy ID: '.$request->id
+        ];
+        ActicityHistory::create($data);
         $category = Product::find($request->id)->update(['selling' => $request->selling]);
     }
     public function destroy($id){
