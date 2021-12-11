@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
 
 class Order extends Model
 {
@@ -14,7 +15,7 @@ class Order extends Model
     protected $perPage = 5;
 
     public function scopeOrderCode($query, $request){
-        if($request->id){
+        if($request->order_code){
             $query->where('order_code', $request->order_code);
         }
         return $query;
