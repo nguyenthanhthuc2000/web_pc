@@ -115,6 +115,7 @@
                                                 <tr>
                                                     <th colspan="2">Không có dữ liệu</th>
                                                 </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
