@@ -39,8 +39,8 @@
                                 <div class="price-range-wrap">
                                     <div class="range-slider">
                                         <div class="price-input">
-                                            <input type="number" id="minamount" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
-                                            <input type="number" id="maxamount" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
+                                            <input type="number" id="minamount" min="0" placeholder="Giá thấp nhất" name="from" value="{{ (request()->get('from')) ? request()->get('from') : 0 }}">
+                                            <input type="number" id="maxamount" min="0" placeholder="Giá cao nhất" name="to" value="{{ (request()->get('to')) ? request()->get('to') : 0 }}">
                                         </div>
                                     </div>
                                 </div>
