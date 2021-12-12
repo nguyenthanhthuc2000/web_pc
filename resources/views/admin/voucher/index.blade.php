@@ -54,10 +54,10 @@
                                                     @endif
                                                 </th>
                                                 <td class="text-center">
-                                                    {{number_format($voucher->total, 0,',','.')}}
+                                                    {{number_format($voucher->used, 0,',','.')}}
                                                 </td>
                                                 <td  class="text-center">
-                                                    {{number_format($voucher->used, 0,',','.')}}
+                                                    {{number_format($voucher->total, 0,',','.')}}
                                                 </td>
                                                 <td  class="text-center">
                                                     <input type="checkbox" {{$voucher->status == 1 ? 'checked' : ''}}  class="status" data-id="{{$voucher->id}}">
@@ -65,10 +65,12 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <a href="{{ route('voucher.edit', $voucher->id) }}" class=" btn-border btn-custom  btn btn-warning">Sửa</a>
+                                                    @if(Auth::user()->level == 1)
                                                     <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
                                                             data-url="{{ route('voucher.destroy', $voucher->id) }}"
                                                     >Xóa
                                                     </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

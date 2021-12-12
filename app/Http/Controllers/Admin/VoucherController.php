@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Voucher;
+use App\Models\OrderDetail;
 
 class VoucherController extends Controller
 {
@@ -58,6 +59,12 @@ class VoucherController extends Controller
     public function destroy($id){
 
         $voucher = Voucher::find($id);
+
+        $orderDetails = OrderDetail::where('voucher_id', $id)->get();
+        if($orderDetails->count() > 0){
+            return redirect()->route('voucher.index')->with('error', 'Mã giảm giá  '.$voucher->code.' đã được dùng, không thể xóa !');
+        }
+
         if($voucher->delete($id)){
             return redirect()->route('voucher.index')->with('success', 'Xóa thành công!');
         }

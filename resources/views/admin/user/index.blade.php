@@ -54,7 +54,7 @@
                                             </td>
                                             <td>{{$user->email}}</td>
                                             <td class="text-center">
-                                                <a href=""
+                                                <a href="{{ route('user.history.detail', $user->id) }}"
                                                    class=" btn-border btn-custom  btn btn-success">Xem
                                                 </a>
                                             </td>
@@ -66,6 +66,8 @@
                                             <td class="text-right">
                                                 <a href="{{ route('user.edit', $user->id) }}"
                                                    class=" btn-border btn-custom  btn btn-warning">Sửa</a>
+                                                <a href="{{ route('admin.reset.pass', $user->id) }}"
+                                                   class=" btn-border btn-custom  btn btn-primary btn-reset">Đặt lại mật khẩu</a>
                                                 <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
                                                         data-url="{{ route('user.destroy', $user->id) }}"
                                                 >Xóa
@@ -95,6 +97,15 @@
 @endsection
 @push('js')
     <script>
+    $('.btn-reset').click(function(e){
+         e.preventDefault();
+         href = $(this).attr('href');
+         if(confirm("Xác nhận cập nhật mật khẩu?")){
+            window.location.href = href;
+         }
+    })
+
+
      // trạng thái
         $('.status').click(function(){
             let status = 0;

@@ -173,6 +173,17 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <input type="text" id="" class="id-order" value="13" hidden="">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="status" id="txt0" value="{{$pro->status == 1 ? 1 : 0}}" {{$pro->status == 1 ? 'checked' : ''}}>
+                                                        <label class="form-check-label " for="txt0"> Nổi bật  </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="selling" id="txt1" value="{{$pro->selling == 1 ? 1 : 0}}" {{$pro->selling == 1 ? 'checked' : ''}}>
+                                                        <label class="form-check-label " for="txt1"> Bán chạy  </label>
+                                                    </div>
+                                                </div>
                                                 <table class="table">
                                                     <thead>
                                                     <tr>

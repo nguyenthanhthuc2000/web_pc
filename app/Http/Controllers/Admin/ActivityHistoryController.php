@@ -12,4 +12,9 @@ class ActivityHistoryController extends Controller
         $listHistory = ActicityHistory::orderBy('id', 'DESC')->paginate();
         return view('admin.history.index', ['listHistory' => $listHistory]);
     }
+
+    public function detail($id){
+        $listHistory = ActicityHistory::where('user_id', $id)->orderBy('id', 'DESC')->paginate();
+        return view('admin.history.detail', ['listHistory' => $listHistory]);
+    }
 }

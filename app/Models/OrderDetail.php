@@ -14,7 +14,7 @@ class OrderDetail extends Model
     protected $perPage = 5;
 
     public function product(){
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(Product::class, 'id', 'product_id')->onlyTrashed();
     }
     public function voucher(){
         return $this->hasOne(Voucher::class, 'id', 'voucher_id');
