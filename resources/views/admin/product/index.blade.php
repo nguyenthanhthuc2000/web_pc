@@ -9,7 +9,7 @@
                 <div class="d-flex" style="justify-content: space-between">
                     <div class=" mt-5">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item active">Sản phẩm</li>
+                            <li class="breadcrumb-item active">Sản phẩm {{ isset($title) ? $title : '' }}</li>
                         </ul>
                     </div>
                     <div class=" mt-5">
@@ -71,7 +71,7 @@
                                                     @if($pro->deleted_at == null)
                                                     <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
                                                             data-url="{{ route('product.destroy', $pro->id) }}"
-                                                    >Xóa
+                                                    >Khóa
                                                     </button>
                                                     @else
                                                         <button type="button" class="btn-border btn-custom btn btn-danger btn-restore"
@@ -79,6 +79,10 @@
                                                         >Restore
                                                         </button>
                                                     @endif
+                                                        <button type="button" class="btn-border btn-custom btn btn-danger btn-force-delete"
+                                                                data-url="{{ route('product.force.delete', $pro->id) }}"
+                                                        >Xóa
+                                                        </button>
                                                 @endif
                                             </td>
                                         </tr>
@@ -150,12 +154,12 @@
             var url = $(this).data('url');
             Swal.fire({
               title: 'Xác nhận',
-              text: 'Bạn có chắc xóa không?',
+              text: 'Bạn có chắc khóa không?',
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Ok, Xóa',
+              confirmButtonText: 'Ok, Khóa',
               cancelButtonText: 'Hủy'
             }).then((result) => {
               if (result.isConfirmed) {
@@ -171,6 +175,25 @@
             Swal.fire({
               title: 'Xác nhận',
               text: 'Khôi phục sản phẩm này?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok',
+              cancelButtonText: 'Hủy'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                   window.location.href = url;
+              }
+            })
+
+        })
+        //xóa vỉnh vien
+        $('.btn-force-delete').click(function(){
+            var url = $(this).data('url');
+            Swal.fire({
+              title: 'Xóa vĩnh viễn sản phẩm này ',
+              text: 'Thao tác không thể  khôi phục ?',
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',

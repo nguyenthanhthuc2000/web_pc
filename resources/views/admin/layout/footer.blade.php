@@ -12,7 +12,12 @@
 <script src="/ckeditor/ckeditor.js"></script>
 @stack('js')
 <script>
-    CKEDITOR.replace('ckeditor');
+    CKEDITOR.replace('ckeditor',{
+      filebrowserImageUploadUrl : "{{ url('admin/upload-manager/uploads-ckeditor?_token='.csrf_token()) }}",
+      filebrowserBrowseUrl : "{{ url('admin/upload-manager/file/file-browser?_token='.csrf_token()) }}",
+      filebrowserUploadMethod : 'form'
+    });
+  CKEDITOR.config.entities = false; //khong bi loi font khi insert
 </script>
 </body>
 

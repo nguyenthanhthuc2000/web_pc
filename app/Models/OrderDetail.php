@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderDetail extends Model
 {
@@ -14,7 +15,7 @@ class OrderDetail extends Model
     protected $perPage = 5;
 
     public function product(){
-        return $this->hasOne(Product::class, 'id', 'product_id')->onlyTrashed();
+        return $this->hasOne(Product::class, 'id', 'product_id')->withTrashed();
     }
     public function voucher(){
         return $this->hasOne(Voucher::class, 'id', 'voucher_id');
