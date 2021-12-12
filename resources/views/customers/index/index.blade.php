@@ -81,6 +81,9 @@
                         <a href=""><h2>{{ $category->name }}</h2></a>
                     </div>
                 </div>
+                <div class="col-lg-12 text-center pb-3">
+                    <a href="" class="text-primary font-italic">Xem tất cả</a>
+                </div>
             </div>
         @endif
         <div class="row featured__filter owl-carousel">
@@ -120,7 +123,7 @@
 <!-- Featured Section End -->
 
 <!-- Banner Begin -->
-<div class="banner">
+<div class="banner pb-4">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
