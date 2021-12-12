@@ -69,6 +69,11 @@ Route::prefix('admin')->group(function () {
                     Route::post('store','Admin\VoucherController@store')->name('voucher.store'); //
                     Route::post('update/{id}','Admin\VoucherController@update')->name('voucher.update'); //
                 });
+
+                Route::prefix('upload-manager')->group(function () {
+                    Route::post('uploads-ckeditor','Admin\UploadController@uploads_ckeditor');
+                    Route::get('file/file-browser','Admin\UploadController@file_browser');
+                });
             });
         });
     });
