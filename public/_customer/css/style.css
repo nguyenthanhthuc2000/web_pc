@@ -1167,15 +1167,16 @@ ol {
     transform: translate(-50%, -50%);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+
+/* .price-input input::-webkit-outer-spin-button,
+.price-input input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type=number] {
+.price-input input[type=number] {
     -moz-appearance: textfield;
-}
+} */
 
 .price-range-wrap .range-slider .price-input input {
     font-size: 16px;
@@ -3539,6 +3540,4 @@ input[type=number] {
     .blog__details__hero__text h2 {
         font-size: 24px;
     }
-
-
 }
