@@ -21,6 +21,14 @@ class ProductController extends Controller
         return view('admin.product.index', compact('pros'));
     }
 
+    public function restoreList(Request $request){
+        $title = 'ngừng kinh doanh';
+        $pros = Product::onlyTrashed()->orderBy('id', 'DESC')->Id($request)->paginate();
+        $pros->appends(['id' => $request->id]);
+
+        return view('admin.product.index', compact('pros', 'title'));
+    }
+
     public function add(){
         $cats = Category::orderBy('id', 'DESC')->get();
         return view('admin.product.add', compact('cats'));
@@ -127,35 +135,47 @@ class ProductController extends Controller
 
         $products = Product::find($id);
 
-        $orderDetails = OrderDetail::where('product_id', $id)->get();
-        if($orderDetails->count() > 0){
-            return redirect()->route('product.index')->with('error', 'Sản phẩm  '.$products->name.' đã được bán '.$orderDetails->count().' lần, không thể xóa !');
-        }
-
-
         if($products->delete($id)){
             $data = [
                 'user_id' => Auth::id(),
-                'action' => 'Xóa sản phẩm ID: '.$id
+                'action' => 'Cho sản phẩm ngừng kinh doanh ID: '.$id
             ];
             ActicityHistory::create($data);
-            return redirect()->route('product.index')->with('success', 'Xóa thành công!');
+            return redirect()->route('product.index')->with('success', 'Khóa thành công!');
         }
-        return redirect()->route('product.index')->with('error', 'Xóa thất bại!');
+        return redirect()->route('product.index')->with('error', 'Khóa thất bại!');
     }
 
     public function restore($id){
-
-
         if(Product::withTrashed()->where('id', $id)->restore()){
             $data = [
                 'user_id' => Auth::id(),
                 'action' => 'Khôi phục sản phẩm ID: '.$id
             ];
             ActicityHistory::create($data);
-            return redirect()->route('product.index')->with('success', 'Khôi phục thành công!');
+            return redirect()->route('product.restore.list')->with('success', 'Khôi phục thành công!');
         }
-        return redirect()->route('product.index')->with('error', 'Khôi phục thất bại!');
+        return redirect()->route('product.restore.list')->with('error', 'Khôi phục thất bại!');
+    }
+
+    public function forceDelete($id){
+
+        $products = Product::find($id);
+
+        $orderDetails = OrderDetail::where('product_id', $id)->get();
+        if($orderDetails->count() > 0){
+
+            return redirect()->route('product.index')->with('error', 'Sản phẩm  '.$products->name.' đã được bán '.$orderDetails->count().' lần, không thể xóa !');
+        }
+        if(Product::withTrashed()->where('id', $id)->forceDelete()){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Xóa sản phẩm vĩnh viễn sản phẩm ID: '.$id
+            ];
+            ActicityHistory::create($data);
+            return back()->with('success', 'Xóa vĩnh viễn thành công!');
+        }
+        return back()->with('error', 'Xóa vĩnh viễn thất bại!');
     }
 
     public function edit($id){

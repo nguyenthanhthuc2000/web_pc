@@ -41,6 +41,7 @@
                 <li class="submenu"> <a href="#"><i class="fab fa-product-hunt"></i> <span>  Sản phẩm  </span> <span class="menu-arrow"></span></a>
                     <ul class="submenu_class" style="display: none;">
                         <li><a href="{{ route('product.index') }}"> Danh sách </a></li>
+                        <li><a href="{{ route('product.restore.list') }}"> SP ngừng kinh doanh </a></li>
                         <li><a href="{{ route('product.add') }}"> Thêm mới </a></li>
                     </ul>
                 </li>

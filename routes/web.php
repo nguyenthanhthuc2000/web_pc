@@ -18,6 +18,7 @@ Route::prefix('admin')->group(function () {
 
             Route::prefix('product')->group(function () {
                 Route::get('index','Admin\ProductController@index')->name('product.index');
+                Route::get('restore','Admin\ProductController@restoreList')->name('product.restore.list');
                 Route::get('add','Admin\ProductController@add')->name('product.add');
                 Route::get('edit/{id}','Admin\ProductController@edit')->name('product.edit');
                 Route::post('store','Admin\ProductController@store')->name('product.store');
@@ -26,6 +27,7 @@ Route::prefix('admin')->group(function () {
                 Route::post('update-selling','Admin\ProductController@selling')->name('product.selling'); //trạng thái sel
                 Route::get('destroy/{id}','Admin\ProductController@destroy')->name('product.destroy')->middleware(CheckLevel::class);
                 Route::get('restore/{id}','Admin\ProductController@restore')->name('product.restore')->middleware(CheckLevel::class);
+                Route::get('force-delete/{id}','Admin\ProductController@forceDelete')->name('product.force.delete')->middleware(CheckLevel::class);
             });
 
             Route::prefix('order')->group(function () {
