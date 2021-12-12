@@ -74,7 +74,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="count-cart">3</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="count-cart">{{ (Session::has('carts') ? count(Session::get('carts')) : 0) }}</span></a></li>
                             @if (Auth::check())
                             <li>
                                 <a href="{{ route('customer.logout') }}" title="Đăng xuất" style="font-size: 18px;">

@@ -70,7 +70,7 @@
     <!-- Js Plugins -->
     <script src="/_customer/js/jquery-3.3.1.min.js"></script>
     <script src="/_customer/js/bootstrap.min.js"></script>
-    <script src="/_customer/js/bootstrap.bundle.js"></script>
+<script src="/_customer/js/bootstrap.bundle.js"></script>
     <script src="/_customer/js/jquery.nice-select.min.js"></script>
     <script src="/_customer/js/jquery-ui.min.js"></script>
     <script src="/_customer/js/jquery.slicknav.js"></script>
@@ -188,6 +188,7 @@
                 method:'POST',
                 data:{id:id},
                 success:function(data){
+                $('.count-cart').text(data.count);
                   loadCart();
                     loadCartTotal();
                 }

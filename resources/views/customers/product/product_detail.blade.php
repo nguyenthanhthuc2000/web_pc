@@ -2,6 +2,7 @@
 @section('title')
     {{ $detailsProduct->name }}
 @endsection
+{{-- @dd(json_decode($detailsProduct->options)) --}}
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('_customer/img/breadcrumb.jpg') }}">
@@ -71,17 +72,14 @@
                         </a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
-                            <li><b>Share on</b>
-                                <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                            </li>
+                            @if(json_decode($detailsProduct->options) != null)
+                                @php
+                                    $countOption = (count(json_decode($detailsProduct->options)) > 3) ? 3 : count(json_decode($detailsProduct->options))
+                                @endphp
+                                @for ($i = 0; $i < $countOption; $i++)
+                                    <li><b>{{ json_decode($detailsProduct->options)[$i][0] }}</b> <span>{{ json_decode($detailsProduct->options)[$i][0] }}{{ json_decode($detailsProduct->options)[$i][1] }}</span></li>
+                                @endfor
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -137,8 +135,8 @@
                                             <input type="hidden" value="{{ $detailsProduct->id }}"name="product_id">
                                             @csrf
                                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-                                                <input type="text" class="form-control mr-3" placeholder="Nội dung bình luận" name="comment">
-                                                <button class="btn btn-primary" type="sunmit">Gửi</button>
+                                                <textarea class="form-control mr-3" placeholder="Nội dung bình luận" name="comment" rows="3"></textarea>
+                                                <button class="btn btn-primary mt-auto" type="sunmit" style="height: 50px;">Gửi</button>
                                             </div>
                                             @error('comment')
                                                 <i class="error text-danger">{{ $message }}</i>

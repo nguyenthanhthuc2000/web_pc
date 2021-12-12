@@ -24,8 +24,8 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <input type="text" placeholder="What do yo u need?">
+                        <form action="{{ route('customer.search') }}">
+                            <input type="text" placeholder="Nhập từ khóa" name="key" required>
                             <button type="submit" class="site-btn">Tìm kiếm</button>
                         </form>
                     </div>

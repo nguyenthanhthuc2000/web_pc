@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                    <h6><span class="icon_tag_alt"></span> Bạn có một phiếu mua hàng? <a href="#">Nhấn vào</a> để nhập mã
                     </h6>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Địa chỉ<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add"
+                                <input type="text" placeholder="Địa chỉ" class="checkout__input__add"
                                     value="{{ Auth::check() == true ? Auth::user()->address : '' }}" name="address"
                                 >
                                 @error('address')
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Ghi chú<span>*</span></p>
+                                <p>Ghi chú<p>
                                 <input type="text" name="note" value="">
                             </div>
                         </div>

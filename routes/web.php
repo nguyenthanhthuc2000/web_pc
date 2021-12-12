@@ -84,7 +84,7 @@ Route::post('/comment', 'customers\ProductController@comment')->name('customer.p
 Route::get('/shop', 'customers\ShopController@index')->name('customer.shop'); //trang cảu hàng -  danh sách sản phẩm
 Route::get('/shop/{category}', 'customers\ShopController@getByCategory')->name('customer.shop.category'); // danh achs sản phẩm theo danh mục
 Route::get('/checkout', 'customers\CheckoutController@index')->name('customer.checkout'); //trang tnanh toán
-
+Route::get('/search', 'customers\ShopController@search')->name('customer.search'); // tìm kiếm sản phảm
 
 Route::post('add-cart', 'customers\CartController@addCart')->name('customer.add.cart'); // thêm sản phẩm vào giỏ hàng
 Route::post('del-cart', 'customers\CartController@delCart')->name('customer.del.cart'); // xóa sản phẩm trong giỏ hàng

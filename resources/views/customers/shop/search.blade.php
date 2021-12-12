@@ -63,12 +63,6 @@
                                     <input type="checkbox" name="selling" {{ (request()->get('selling') == true) ? 'checked' : '' }}>
                                 </div>
                             </div>
-                            <div class="sidebar__item">
-                                <div class="filter__sort">
-                                    <span class="mr-2">Sản phẩm nổi bật</span>
-                                    <input type="checkbox" name="feature" {{ (request()->get('feature') == true) ? 'checked' : '' }}>
-                                </div>
-                            </div>
                             <div class="sidebar__item text-right">
                                 <button class="btn btn-success" type="sunmit">Lọc</button>
                             </div>

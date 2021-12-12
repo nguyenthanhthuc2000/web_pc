@@ -87,10 +87,10 @@ class CartController extends Controller
                 }
             }
             Session::put('carts',$carts);
-            return Response()->json(['status' => 200]);
+            return Response()->json(['status' => 200,'count' => count($carts)]);
         }
         else{
-            Response()->json(['status' => 403]);
+            return Response()->json(['status' => 403]);
         }
     }
 
