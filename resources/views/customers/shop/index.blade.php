@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="{{ route('customer.product.detail', $product->slug) }}">{{ $product->name }}</a></h6>
-                                        <h5>{{ number_format($product->price, 0,',','.') }} VNĐ</h5>
+                                        <h5>{{ ($product->deleted_at != null) ? 'Ngừng kinh doanh' : number_format($product->price, 0,',','.') }} VNĐ</h5>
                                     </div>
                                 </div>
                             </div>
