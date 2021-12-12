@@ -54,6 +54,18 @@ class ProductController extends Controller
             'price' => $request->price,
             'content' => $request->content_pro,
         ];
+        if($request->selling != null){
+            $array = $array + array('selling' =>  1);
+        }
+        else{
+            $array = $array + array('selling' =>  0);
+        }
+        if($request->status != null){
+            $array = $array + array('status' =>  1);
+        }
+        else{
+            $array = $array + array('status' =>  0);
+        }
 
         if($request->file('image1')){
             //tạo tên mới cho ảnh để k bị trùng
@@ -132,6 +144,20 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('error', 'Xóa thất bại!');
     }
 
+    public function restore($id){
+
+
+        if(Product::withTrashed()->where('id', $id)->restore()){
+            $data = [
+                'user_id' => Auth::id(),
+                'action' => 'Khôi phục sản phẩm ID: '.$id
+            ];
+            ActicityHistory::create($data);
+            return redirect()->route('product.index')->with('success', 'Khôi phục thành công!');
+        }
+        return redirect()->route('product.index')->with('error', 'Khôi phục thất bại!');
+    }
+
     public function edit($id){
         $pro = Product::find($id);
         $options = json_decode($pro->options);
@@ -173,6 +199,19 @@ class ProductController extends Controller
                 'desc' => $request->desc,
                 'price' => $request->price,
             ];
+
+            if($request->selling != null){
+                $array = $array + array('selling' =>  1);
+            }
+            else{
+                $array = $array + array('selling' =>  0);
+            }
+            if($request->status != null){
+                $array = $array + array('status' =>  1);
+            }
+            else{
+                $array = $array + array('status' =>  0);
+            }
 
             if ($request->file('image1')) {
                 //tạo tên mới cho ảnh để k bị trùng

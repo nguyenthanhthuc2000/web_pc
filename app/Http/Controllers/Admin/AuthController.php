@@ -14,6 +14,17 @@ class AuthController extends Controller
         return view('admin.auth.login');
     }
 
+    public function getResetPass($id){
+
+        $password = substr(md5(microtime()),rand(0,5), 6);
+        $user = User::find($id);
+        if($user->update(['password' => Hash::make($password)])){
+            return redirect()->route('user.index')->with('success', 'Mật khẩu mới của tài khoản '.$user->email.' là: '.$password);
+        }
+        return redirect()->route('user.index')->with('error', 'Cập nhật thất bại!');
+
+    }
+
     public function postLogin(Request $request){
         $this->validate($request,
             [

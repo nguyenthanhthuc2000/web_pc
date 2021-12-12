@@ -20,8 +20,9 @@
             @include('notification')
             <div class="row">
                 <div class="top-nav-search" style="margin: 0 0 20px 15px;">
-                    <form style="margin: 0">
-                        <input type="text" class="form-control" placeholder="Search here">
+                    <form style="margin: 0" method="get" action="{{ route('user.index') }}">
+                        @csrf
+                        <input type="text" class="form-control" name="email" placeholder="Search here">
                         <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -53,7 +54,7 @@
                                             </td>
                                             <td>{{$user->email}}</td>
                                             <td class="text-center">
-                                                <a href=""
+                                                <a href="{{ route('user.history.detail', $user->id) }}"
                                                    class=" btn-border btn-custom  btn btn-success">Xem
                                                 </a>
                                             </td>
@@ -65,6 +66,8 @@
                                             <td class="text-right">
                                                 <a href="{{ route('user.edit', $user->id) }}"
                                                    class=" btn-border btn-custom  btn btn-warning">Sửa</a>
+                                                <a href="{{ route('admin.reset.pass', $user->id) }}"
+                                                   class=" btn-border btn-custom  btn btn-primary btn-reset">Đặt lại mật khẩu</a>
                                                 <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
                                                         data-url="{{ route('user.destroy', $user->id) }}"
                                                 >Xóa
@@ -94,6 +97,15 @@
 @endsection
 @push('js')
     <script>
+    $('.btn-reset').click(function(e){
+         e.preventDefault();
+         href = $(this).attr('href');
+         if(confirm("Xác nhận cập nhật mật khẩu?")){
+            window.location.href = href;
+         }
+    })
+
+
      // trạng thái
         $('.status').click(function(){
             let status = 0;

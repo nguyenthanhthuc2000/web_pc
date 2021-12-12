@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $users = User::orderBy('id', 'DESC')->where('level', 2)->whereNotIn('id', [1])->Email($request)->paginate();
+        $users->appends(['email' => $request->email]);
 
-        $users = User::orderBy('id', 'DESC')->whereNotIn('id', [1])->paginate();
         return view('admin.user.index', compact('users'));
     }
 

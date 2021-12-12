@@ -66,10 +66,12 @@
                                             </td>
                                             <td class="text-right">
                                                 <a href="{{ route('order.detail', $order->id) }}" class=" btn-border btn-custom  btn btn-warning">Xem</a>
-                                                <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
-                                                        data-url="{{ route('order.destroy', $order->id) }}"
-                                                >Xóa
-                                                </button>
+                                                @if(Auth::user()->level == 1)
+                                                    <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
+                                                            data-url="{{ route('order.destroy', $order->id) }}"
+                                                    >Xóa
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

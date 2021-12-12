@@ -66,10 +66,20 @@
                                             </td>
                                             <td class="text-right">
                                                 <a href="{{ route('product.edit', $pro->id) }}" class=" btn-border btn-custom  btn btn-warning">Sửa</a>
-                                                <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
-                                                        data-url="{{ route('product.destroy', $pro->id) }}"
-                                                >Xóa
-                                                </button>
+
+                                                @if(Auth::user()->level == 1)
+                                                    @if($pro->deleted_at == null)
+                                                    <button type="button" class="btn-border btn-custom btn btn-danger btn-delete"
+                                                            data-url="{{ route('product.destroy', $pro->id) }}"
+                                                    >Xóa
+                                                    </button>
+                                                    @else
+                                                        <button type="button" class="btn-border btn-custom btn btn-danger btn-restore"
+                                                                data-url="{{ route('product.restore', $pro->id) }}"
+                                                        >Restore
+                                                        </button>
+                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -139,13 +149,33 @@
         $('.btn-delete').click(function(){
             var url = $(this).data('url');
             Swal.fire({
-              title: 'Bạn có chắc xóa không?',
-              text: "Bạn sẽ không thể khôi phục điều này!",
+              title: 'Xác nhận',
+              text: 'Bạn có chắc xóa không?',
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Ok, Xóa',
+              cancelButtonText: 'Hủy'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                   window.location.href = url;
+              }
+            })
+
+        })
+
+        //restore
+        $('.btn-restore').click(function(){
+            var url = $(this).data('url');
+            Swal.fire({
+              title: 'Xác nhận',
+              text: 'Khôi phục sản phẩm này?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok',
               cancelButtonText: 'Hủy'
             }).then((result) => {
               if (result.isConfirmed) {

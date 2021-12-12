@@ -34,7 +34,7 @@
                         <label class="form-check-label txt2" for="2"> Hoàn thành </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="status" id="3" value="3" {{$order->status == 3 ? 'checked' : ''}}>
+                        <input class="form-check-input" type="radio" name="status" id="3" value="3"  {{$order->status == 3 ? 'checked' : ''}}>
                         <label class="form-check-label txt3" for="3"> Hủy </label>
                     </div>
                 </form>
@@ -164,24 +164,31 @@
 
 @push('js')
     <script>
-        $('.form-check-input').click(function(){
-            const x = $(this).val();
-            const status = $(this).val();
-			const id = $('.id-order').val();
-            const txt_status = $(".txt"+x).text();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-			$.ajax({
-				url: window.route('order.status'),
-				method:'POST',
-				data:{status:status, id:id, txt_status:txt_status},
-				success:function(data){
+        $('.form-check-input').click(function(e){
+            var idRadio = $(this).val();
+            e.preventDefault();
 
-				}
-			})
-        })
-    </script>
+            if(confirm("Xác nhận cập nhật trạng thái đơn hàng?")){
+
+             const x = $(this).val();
+             const status = $(this).val();
+             const id = $('.id-order').val();
+             const txt_status = $(".txt"+x).text();
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+             $.ajax({
+                 url: window.route('order.status'),
+                 method:'POST',
+                 data:{status:status, id:id, txt_status:txt_status},
+                 success:function(data){
+                    $('input[type=radio]').prop("checked", "fasle")
+                    $('#'+idRadio).prop("checked", "true")
+                 }
+             })
+            }
+         })
+</script>
 @endpush

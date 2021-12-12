@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 
 class Product extends Model
 {
+    use SoftDeletes;// add soft delete
     use HasFactory;
     protected $table = 'product';
     protected $guarded = [];
@@ -26,7 +28,7 @@ class Product extends Model
 
     public function scopeId($query, $request){
         if($request->id){
-            $query->where('id', $request->id);
+            $query->where('id', $request->id)->onlyTrashed();
         }
         return $query;
     }

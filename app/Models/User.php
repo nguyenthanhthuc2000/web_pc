@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Scope;
 
 class User extends Authenticatable
 {
@@ -45,4 +46,11 @@ class User extends Authenticatable
     protected $guarded = [];
     public $timestamps = true;
     protected $perPage = 5;
+
+    public function scopeEmail($query, $request){
+        if($request->email){
+            $query->where('email', $request->email);
+        }
+        return $query;
+    }
 }

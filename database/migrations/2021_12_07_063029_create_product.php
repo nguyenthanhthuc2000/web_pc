@@ -31,6 +31,7 @@ class CreateProduct extends Migration
             $table->integer('status')->default(0);
             $table->integer('selling')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

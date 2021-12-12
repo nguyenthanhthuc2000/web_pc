@@ -154,6 +154,17 @@
                                                 <span class="error text-danger" >{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            <div class="form-group">
+                                                <input type="text" id="" class="id-order" value="13" hidden="">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox"  id="txt0" name="status" value="0" checked>
+                                                    <label class="form-check-label " for="txt0"> Nổi bật  </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="txt1"  name="selling" value="0" checked>
+                                                    <label class="form-check-label " for="txt1"> Bán chạy  </label>
+                                                </div>
+                                            </div>
 
                                             <table class="table">
                                                 <thead>
