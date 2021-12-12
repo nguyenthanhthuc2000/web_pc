@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 text-center pb-3">
-                    <a href="" class="text-primary font-italic">Xem tất cả</a>
+                    <a href="{{ route('customer.shop.category', $category->slug) }}" class="text-primary font-italic">Xem tất cả</a>
                 </div>
             </div>
         @endif
