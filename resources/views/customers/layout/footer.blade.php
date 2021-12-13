@@ -147,7 +147,7 @@
                     method:'POST',
                     data:{code:code},
                     success:function(data){
-                        if(data.status = 200){
+                        if(data.status === 200){
                             loadCart();
                             loadCartTotal();
                             Swal.fire(
