@@ -67,12 +67,12 @@ class ShopController extends Controller
     }
 
     public function search(Request $request){
-        $listProduct = Product::where('name', 'LIKE', '%'.$request->key.'%')->paginate();
+        $listProduct = Product::withTrashed()->where('name', 'LIKE', '%'.$request->key.'%')->paginate();
         $listCategory = Category::where('status', 1)->get();
         $data = [
             'listCategory' => $listCategory,
             'listProduct' => $listProduct
         ];
-        return view('customers.shop.index', $data);
+        return view('customers.shop.search', $data);
     }
 }

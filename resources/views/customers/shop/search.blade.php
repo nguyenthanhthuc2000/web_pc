@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Cửa hàng</h2>
+                        <h2>Tìm kiếm</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ route('index') }}">Trang chủ</a>
-                            <span>Của hàng</span>
+                            <span>Tìm kiếm</span>
                         </div>
                     </div>
                 </div>
@@ -63,6 +63,12 @@
                                     <input type="checkbox" name="selling" {{ (request()->get('selling') == true) ? 'checked' : '' }}>
                                 </div>
                             </div>
+                            <div class="sidebar__item">
+                                <div class="filter__sort">
+                                    <span class="mr-2">Sản phẩm nổi bật</span>
+                                    <input type="checkbox" name="feature" {{ (request()->get('feature') == true) ? 'checked' : '' }}>
+                                </div>
+                            </div>
                             <div class="sidebar__item text-right">
                                 <button class="btn btn-success" type="sunmit">Lọc</button>
                             </div>
@@ -104,7 +110,7 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="{{ route('customer.product.detail', $product->slug) }}">{{ $product->name }}</a></h6>
-                                        <h5>{{ number_format($product->price, 0,',','.') }} VNĐ</h5>
+                                        <h5>{!! ($product->deleted_at != null) ? '<div class="text-danger">Ngừng kinh doanh</div>' : number_format($product->price, 0,',','.').' VNĐ' !!}</h5>
                                     </div>
                                 </div>
                             </div>

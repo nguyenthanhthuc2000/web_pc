@@ -56,21 +56,25 @@
                         <h3>{{ $detailsProduct->name }}</h3>
                         <div class="product__details__price">{{ number_format($detailsProduct->price, 0,',','.') }} VNĐ</div>
                         <p>{{ $detailsProduct->desc }}</p>
-                        <div class="product__details__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1" class="qty_{{$detailsProduct->id}}">
+                        <?php if($detailsProduct->deleted_at != null) { ?>
+                            <div class="primary-btn btn-add-cart">Ngừng kinh doanh </div>
+                        <?php } else { ?>
+                            <div class="product__details__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="text" value="1" class="qty_{{$detailsProduct->id}}">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <a  class="primary-btn btn-add-cart"
-                                data-id="{{$detailsProduct->id}}"
-                                data-soluong="{{$detailsProduct->remains}}"
-                                data-price="{{$detailsProduct->price}}"
-                                data-route="{{ route('customer.add.cart') }}"
-                            >THÊM VÀO GIỎ HÀNG
-                        </a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                                <a  class="primary-btn btn-add-cart"
+                                        data-id="{{$detailsProduct->id}}"
+                                        data-soluong="{{$detailsProduct->remains}}"
+                                        data-price="{{$detailsProduct->price}}"
+                                        data-route="{{ route('customer.add.cart') }}"
+                                    >THÊM VÀO GIỎ HÀNG
+                                </a>
+                                <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <?php } ?>
                         <ul>
                             @if(json_decode($detailsProduct->options) != null)
                                 @php
