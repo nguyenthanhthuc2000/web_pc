@@ -3541,3 +3541,7 @@ ol {
         font-size: 24px;
     }
 }
+
+.btn-add-cart {
+    cursor: pointer;
+}
