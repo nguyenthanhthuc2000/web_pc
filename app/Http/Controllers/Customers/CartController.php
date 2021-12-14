@@ -20,29 +20,32 @@ class CartController extends Controller
     }
 
     public function addCoupon(Request $request){
-        if($request->code != null){
-            $counpon = Voucher::where('code', $request->code)->where('status', 1)->first();
-            if($counpon == null){
-                return Response()->json(['status' => 403, 'message' => 'Mã giảm giá không tồn tại!']);
-            }
-            else{
-
-                if($counpon->total > 0) {
-                    $counpon_code_session[] = array(
-                        'counpon_id' =>  $counpon->id,
-                        'counpon_code' =>  $counpon->code,
-                        'counpon_type' =>  $counpon->type,
-                        'counpon_number' =>  $counpon->number,
-                    );
-                    Session::put('counpon_code_session', $counpon_code_session);
-                    return Response()->json(['status' => 200, 'message' => 'Dùng mã giảm giá thành công!']);
+        if(Session::has('carts') && count(Session::get('carts')) > 0){
+            if($request->code != null){
+                $counpon = Voucher::where('code', $request->code)->where('status', 1)->first();
+                if($counpon == null){
+                    return Response()->json(['status' => 403, 'message' => 'Mã giảm giá không tồn tại!']);
                 }
                 else{
-                    return Response()->json(['status' => 403, 'message' => 'Mã giảm giá hết lượt dùng!']);
-                }
 
+                    if($counpon->total > 0) {
+                        $counpon_code_session[] = array(
+                            'counpon_id' =>  $counpon->id,
+                            'counpon_code' =>  $counpon->code,
+                            'counpon_type' =>  $counpon->type,
+                            'counpon_number' =>  $counpon->number,
+                        );
+                        Session::put('counpon_code_session', $counpon_code_session);
+                        return Response()->json(['status' => 200, 'message' => 'Dùng mã giảm giá thành công!']);
+                    }
+                    else{
+                        return Response()->json(['status' => 403, 'message' => 'Mã giảm giá hết lượt dùng!']);
+                    }
+
+                }
             }
         }
+        return Response()->json(['status' => 403, 'message' => 'Giỏ hàng không có sản phẩm!']);
 
     }
 
